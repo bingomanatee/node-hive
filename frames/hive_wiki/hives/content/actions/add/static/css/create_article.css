@@ -1,0 +1,8 @@
+.edit_frame {
+    min-height: 20em;
+}
+
+.edit_frame textarea {
+    width: 100%;
+    min-height: 20em;
+}

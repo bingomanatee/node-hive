@@ -1,0 +1,10 @@
+{
+	"name": "hive_wiki",
+
+	"static": {
+		"css": "/hive_wiki/css",
+		"js":  "/hive_wiki/js",
+		"img": "/hive_wiki/img"
+
+	}
+}

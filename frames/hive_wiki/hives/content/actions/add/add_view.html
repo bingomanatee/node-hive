@@ -1,0 +1,45 @@
+<h1>Create a New Page</h1>
+
+<div ng-app="page_creator">
+    <div ng-controller="page_editor">
+
+        <ul class="nav nav-pills">
+            <li ng-repeat="button in nav_buttons">
+                <button ng-class="toolbar_button_class(button.btn_class)"
+                        ng-click="view_mode(button.btn_class)">{{ button.label }}
+                </button>
+            </li>
+        </ul>
+
+        <div class="row edit_frame" ng-show="current_view == 'side_by_side'">
+            <div class="span6">
+                <textarea ng-model="content" ng-change="new_content">
+
+                </textarea>
+            </div>
+
+            <div class="span6" ng-bind-html-unsafe="rendered()">
+
+            </div>
+        </div>
+        <div class="row edit_frame" ng-show="current_view == 'edit'">
+            <div class="span12">
+                <textarea ng-model="content" ng-change="new_content">
+
+                </textarea>
+            </div>
+        </div>
+        <div class="row edit_frame" ng-show="current_view == 'rendered'">
+            <div class="span12"  ng-bind-html-unsafe="rendered()">
+            </div>
+        </div>
+
+        <div class="btn-bar">
+            <div class="btn-group">
+                <button class="btn" ng-click="cancel()">Cancel</button>
+                <button class="btn btn-success" ng-click="save()">Save</button>
+            </div>
+        </div>
+    </div>
+
+</div>
