@@ -1,0 +1,7 @@
+{
+	"routes": {
+		"get": "/wiki/articles"
+	},
+
+	"layout_name": "hive_wiki"
+}

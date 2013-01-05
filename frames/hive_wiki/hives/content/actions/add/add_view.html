@@ -1,45 +1,128 @@
-<h1>Create a New Page</h1>
-
-<div ng-app="page_creator">
+<div ng-app="page_creator" class="page_creator">
     <div ng-controller="page_editor">
+        <h1>New Article</h1>
 
-        <ul class="nav nav-pills">
-            <li ng-repeat="button in nav_buttons">
-                <button ng-class="toolbar_button_class(button.btn_class)"
-                        ng-click="view_mode(button.btn_class)">{{ button.label }}
+        <form name="prelim" class="form-horizontal">
+
+            <div class="control-group">
+                <label class="control-label" for="title">Title</label>
+
+                <div class="controls">
+                    <input type="text" id="title" name="title" ng-required="true" class="input-xxlarge"
+                           ng-required="true"
+                           ng-minlength="3"
+                           ng-model="title"/>
+                    <span class="help-inline "  ng-show="prelim.title.$error.required">Required</span>
+                    <span class="help-inline "  ng-show="prelim.title.$error.minlength">Must be at least 3 characters</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="name">Name</label>
+
+                <div class="controls">
+                    <input type="text" id="name" name="name" ng-required="true" class="input-xxlarge"
+                           ng-required="true"
+                           ng-minlength="3"
+                           ng-pattern="/^[-\w]*$/"
+                           ng-model="name"/>
+                    <span class="help-inline "  ng-show="prelim.name.$error.required">Required</span>
+                    <span ng-show="prelim.name.$error.pattern" class="help-inline">
+                        only letters,numbers,&quot;-&quot;, &quot;_&quot;</span>
+                    <span class="help-inline "  ng-show="prelim.name.$error.minlength">Must be at least 3 characters</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="intro">Introduction</label>
+
+                <div class="controls">
+                    <textarea id="intro" name="intro" rows="4" class="input-xxlarge" ng-model="intro">
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <ul class="nav nav-tabs">
+                    <li ng-repeat="button in nav_buttons" ng-class="toolbar_button_class(button.btn_class)">
+                        <a ng-click="view_mode(button.btn_class)">{{ button.label }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="editor_frame">
+                <div class="row edit_frame">
+                    <div ng-hide="current_view == 'rendered'"
+                         ng-class="content_class()">
+                        <textarea name="content"
+                                  ng-required="true"
+                                  ng-minlength="20"
+                                  ng-model="content"
+                                  ng-change="new_content">
+                        </textarea><br />
+                        <span class="help-inline "  ng-show="prelim.content.$error.required">Required</span>
+                        <span class="help-inline "  ng-show="prelim.content.$error.minlength">Must be at least 20 characters</span>
+                    </div>
+
+                    <div ng-hide="current_view == 'edit'"
+                         ng-class="rendered_class()"
+                         ng-bind-html-unsafe="rendered()">
+
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+            <div class="tag-list">
+                <b>Tags:</b>
+                <span class="tag" ng-repeat="tag in tags | orderBy">
+                    <span class="input-append">
+
+                <input type="text" class="input input-small"
+                       ng-model="tag"/>&nbsp;<a class="btn-danger add-on"
+                                                ng-click="delete_tag(tag)">
+                        &times;
+                    </a>
+                    </span>
+                    </span>
+                <button ng-hide="show_add_tag" ng-click="show_add_tag = !show_add_tag" class="btn btn-small"><i
+                        class="icon-plus"></i>
+                    Add
                 </button>
-            </li>
-        </ul>
-
-        <div class="row edit_frame" ng-show="current_view == 'side_by_side'">
-            <div class="span6">
-                <textarea ng-model="content" ng-change="new_content">
-
-                </textarea>
             </div>
 
-            <div class="span6" ng-bind-html-unsafe="rendered()">
-
+            <div class="tag-new" ng-show="show_add_tag">
+                <b>Add Tag</b>
+                <ul>
+                    <li>
+                        <input type="text" class=" input input-small" ng-model="new_tag"/>
+                    </li>
+                    <li>
+                        <button class="btn" ng-click="add_tag()">Add</button>
+                    </li>
+                </ul>
             </div>
-        </div>
-        <div class="row edit_frame" ng-show="current_view == 'edit'">
-            <div class="span12">
-                <textarea ng-model="content" ng-change="new_content">
 
-                </textarea>
-            </div>
-        </div>
-        <div class="row edit_frame" ng-show="current_view == 'rendered'">
-            <div class="span12"  ng-bind-html-unsafe="rendered()">
-            </div>
-        </div>
-
-        <div class="btn-bar">
-            <div class="btn-group">
-                <button class="btn" ng-click="cancel()">Cancel</button>
-                <button class="btn btn-success" ng-click="save()">Save</button>
+        </form>
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <ul class="nav">
+                    <li>
+                        <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                    </li>
+                    <li class="divider-vertical"></li>
+                    <li>
+                        <button ng-show="prelim.$valid" class="btn btn-success" ng-click="save()"><i
+                                class="icon-plus "></i>&nbsp;
+                            Save
+                        </button>
+                    </li>
+                    <li>
+                       <a class="#">{{ error_message() }}</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-
 </div>

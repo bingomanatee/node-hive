@@ -5,7 +5,13 @@ var _DEBUG = false;
 
 function _merge_resources() {
 	var js = _.compact(_.toArray(arguments));
-	return _.uniq(_.flatten(js));
+	var out = _.flatten(js);
+	return _.reduce(out, function(out, js){
+		if (!_.contains(out, js)){
+			out.push(js);
+		}
+		return out;
+	}, []);
 }
 
 module.exports = function (apiary, cb) {

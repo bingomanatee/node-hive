@@ -6,3 +6,56 @@
     width: 100%;
     min-height: 20em;
 }
+
+.editor_frame {
+
+    padding: 0em 3em;
+}
+
+.page_creator .navbar-inverse button{
+    text-align: left;
+    font-weight: bold;
+    min-width: 10em;
+}
+
+.tag-list input, .tag-new input {
+
+    margin: 0px;
+}
+
+.tag-list {
+    margin-bottom: 1em;
+}
+
+.tag-list .tag {
+    display: inline-block;
+    padding: 0 0.25em;
+    margin-right: 0.25em;
+}
+
+.tag-new {
+    padding: 0.5em 1em;
+    background-color: rgb(240, 245, 245);
+    border-bottom: 1px solid rgb(200, 200, 200);
+    border-top: 1px solid rgb(200, 200, 200);
+    margin: 1em 0em;
+}
+
+.tag-new ul{
+    display: inline-block;
+    margin: 0px;
+}
+.tag-new li {
+    display: inline-block;
+}
+
+.tag sup {
+    font-size: 100%;
+    font-weight: bold;
+}
+
+a.del_x{
+    color: red;
+   padding: 0.5em 0em;
+    display: inline-block;
+}

@@ -1,12 +1,15 @@
 {
 
 	"routes": {
-		"get": "/wiki/article/new"
+		"get": "/wiki/article/new",
+		"put": "/wiki/article"
 	},
 
 	"javascript_head": [
 		"/js/hive_wiki/vendor/marked.js",
+		"/js/hive_wiki/vendor/underscore-min.js",
 		"/js/hive_wiki/vendor/angular.min.js",
+		"/js/hive_wiki/vendor/angular-resource.js",
 		"/js/hive_wiki/add/create_article.js"
 	],
 
@@ -20,7 +23,7 @@
 	"layout_name": "hive_wiki",
 
 	"static": {
-		"js": "/js/hive_wiki/add",
+		"js":  "/js/hive_wiki/add",
 		"css": "/css/hive_wiki/add"
 	}
 
