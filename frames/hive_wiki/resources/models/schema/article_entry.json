@@ -1,0 +1,12 @@
+{
+	"title":        "string",
+	"author":       {
+		"type": "ObjectId",
+		"rev":  "member"
+	},
+	"written":      "date",
+	"intro":        "string",
+	"content_type": "string",
+	"content":      "string",
+	"html":         "string"
+}

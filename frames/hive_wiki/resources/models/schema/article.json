@@ -1,7 +1,26 @@
 {
-	"title": "string",
-	"name": "string",
-	"content": "string",
-	"html": "string",
-	"tags": ["string"]
+	"_id":          {
+		"type":   "string",
+		"unique": true
+	},
+	"author":       {
+		"type": "ObjectId",
+		"rev":  "member"
+	},
+	"is_topic":     {
+		"type":    "boolean",
+		"default": "false"
+	},
+	"topic":        "string",
+	"title":        "string",
+	"name":         "string",
+	"content":      "string",
+	"content_type": "string",
+	"intro":        "string",
+	"html":         "string",
+	"tags":         ["string"],
+	"deleted":      {
+		"type":    "boolean",
+		"default": false
+	}
 }

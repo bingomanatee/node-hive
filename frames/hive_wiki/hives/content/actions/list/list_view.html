@@ -1,8 +1,24 @@
 <h1>Articles</h1>
 
-<ul>
-    <%articles.forEach(function(article){ %>
-
-    <ul><a href="/wiki/article/<%= article.name %>"><%= article.title %></a></ul>
+<table class="table">
+    <thead>
+    <tr>
+        <th>_id</th>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Topic</th>
+        <th>Introduction</th>
+        <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <% articles.forEach(function(article){ %>
+        <tr>
+            <td><%= article._id %></td>
+            <td><%= article.name %></td>
+            <td><%= article.title %></td>
+            <td><%= article.topic %></td>
+            <td><%= article.intro %></td>
+            <td><a class="btn" href="/wiki/a/<%= article.topic %>/<%= article.name %>">Go</a></td>
+        </tr>
     <% }) %>
-</ul>
+</table>

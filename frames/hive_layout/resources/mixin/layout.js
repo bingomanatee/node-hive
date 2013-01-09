@@ -11,20 +11,23 @@ module.exports = function (apiary, cb) {
 		respond: function (callback) {
 
 			apiary.Model({_pk: 'name', name: '$layouts'}, {}, function () {
-				console.log('layout model made');
 
-				function load_layouts(frame, cb) {
-					if (_DEBUG) console.log('scanning frame for layouts folder: %s', frame.get_config('root'));
+				var all = layouts_dir_loader(apiary.get_config('root'));
+				all.core(apiary);
+				all.load(function () {
+					function load_layouts(frame, cb) {
+						if (_DEBUG) console.log('scanning frame for layouts folder: %s', frame.get_config('root'));
 
-					var ll = layouts_dir_loader(frame.get_config('root'), apiary);
-					ll.core(apiary);
+						var ll = layouts_dir_loader(frame.get_config('root'));
+						ll.core(apiary);
 
-					ll.load(cb ? cb : _.identity);
-				}
+						ll.load(cb ? cb : _.identity);
+					}
 
-				apiary.on_frame(load_layouts);
-				callback();
-			});
+					apiary.on_frame(load_layouts);
+					callback();
+				});
+			})
 
 		}
 	})

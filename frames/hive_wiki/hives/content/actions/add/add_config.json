@@ -1,7 +1,7 @@
 {
 
 	"routes": {
-		"get": "/wiki/article/new",
+		"get": ["/wiki/article/new", "/wiki/article/new/:topic"],
 		"put": "/wiki/article"
 	},
 

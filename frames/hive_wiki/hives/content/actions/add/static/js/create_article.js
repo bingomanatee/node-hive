@@ -5,6 +5,7 @@ function Page_Editor($scope, $filter, $compile, Articles) {
 	$scope.rendered = '';
 	$scope.tags = [];
 	$scope.new_tag = '';
+	$scope.is_topic = 0;
 
 	$scope.add_tag = function () {
 		$scope.tags.push($scope.new_tag.toLowerCase());
@@ -13,47 +14,78 @@ function Page_Editor($scope, $filter, $compile, Articles) {
 	};
 
 	$scope.save = function () {
-		Articles.add({
-			title:   $scope.title,
-			tags:    $scope.tags,
-			content: $scope.content
-		}, function () {
+		var article = {
+			title:    $scope.title,
+			name:     $scope.name,
+			tags:     $scope.tags,
+			content:  $scope.content,
+			topic:    $scope.topic,
+			is_topic: $scope.is_topic
+		};
+
+		if ($scope.is_topic){
+			article.topic = $scope.name;
+			article.name = '';
+		}
+
+		Articles.add(article, function () {
 			document.location = "/wiki/articles";
 		})
 	};
 
-	$scope.$watch('name', function(n){
-		console.log('name:', n);
-		console.log('prelim:', $scope.prelim);
-	});
+	var sud;
+
+	function _start_update_exists (){
+		if (sud){
+			clearTimeout(sud);
+		}
+
+		var name = $scope.name;
+		var topic = $scope.topic;
+		var is_topic = is_topic;
+
+		if (!(name && topic)){
+			return;
+		}
+
+		Articles.exists({name: name, topic: topic}, function(err, ex_result){
+			console.log(ex_result);
+		})
+	}
+
+	$scope.$watch('name', _start_update_exists);
+
+	$scope.$watch('topic', _start_update_exists);
+
+	$scope.$watch('is_topic', _start_update_exists);
 
 	$scope.content_min_length = 10;
 
-	$scope.name_cg = function(){
+	$scope.name_cg = function () {
 		var classes = ['control-group'];
-		if(!$scope.prelim.name.$valid) classes.push('error');
+		if (!$scope.prelim.name.$valid) classes.push('error');
 		return classes.join(' ');
 	};
 
 	$scope.error_message = function () {
-		if (!$scope.prelim){
+		if (!$scope.prelim) {
 			return '';
 		}
-		if ($scope.prelim.$valid){
+		if ($scope.prelim.$valid) {
 			return '';
 		}
 
-		if ($scope.prelim.$error.required){
+		if ($scope.prelim.$error.required) {
 			var r = $scope.prelim.$error.required[0];
 			return r.$name + ' required';
 		}
 
-		if ($scope.prelim.$error.pattern){
+		if ($scope.prelim.$error.pattern) {
 			var p = $scope.prelim.$error.pattern[0];
 			return p.$name + ' is badly formatted';
 		}
 
-		if ($scope.prelim.$error.minlength){
+		if ($scope.prelim.$error.minlength) {
 			var m = $scope.prelim.$error.minlength[0];
 			return m.$name + ' is too short';
 		}
@@ -89,10 +121,12 @@ function Page_Editor($scope, $filter, $compile, Articles) {
 		return $scope.content ? marked($scope.content) : '';
 	};
 
-	$scope.content_class= function(){
-		if ($scope.current_view == 'side_by_side'){ return 'span6'}
+	$scope.content_class = function () {
+		if ($scope.current_view == 'side_by_side') {
+			return 'span6'
+		}
 		return 'span12'
-	}
+	};
 
 	$scope.rendered_class = $scope.content_class;
 
@@ -110,11 +144,15 @@ var page_creator_app = angular.module('page_creator', ['articleServices']);
 
 angular.module('articleServices', ['ngResource']).factory('Articles',
 	function ($resource) {
-		return  $resource('/wiki/article/:_id', {_id: '@id'},
+		return  $resource('/wiki/article/:_id', {_id: '@id', 'name': '@name', 'topic': '@topic'},
 
 			{add: {method: 'PUT'}
 			});
-	});
+	}).factory('ArticleExists',
+	function($resource){
+		return $resource('/wiki/exists/:topic/:name')
+	}
+);
 
 page_creator_app.controller('page_editor', Page_Editor, ['$scope', '$filter', '$compile', 'Articles']);
 

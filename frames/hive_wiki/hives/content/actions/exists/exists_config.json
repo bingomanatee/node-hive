@@ -1,0 +1,5 @@
+{
+	"routes": {
+			  "get": "/wiki/exists/:topic/:name"
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"routes": {
+			  "get": "/in/routes"
+	},
+
+	"layout_name": "hive_queen"
+
+}

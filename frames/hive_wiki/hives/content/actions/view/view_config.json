@@ -1,0 +1,7 @@
+{
+	"routes": {
+		"get": "/wiki/a/:topic/:name"
+	},
+
+	"layout_name": "hive_wiki"
+}

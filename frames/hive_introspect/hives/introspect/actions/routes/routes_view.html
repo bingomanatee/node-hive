@@ -1,0 +1,36 @@
+<h1>Routes</h1>
+<p>Routes for Apiary <tt><b><%= site_root %></b></tt></p>
+<table>
+    <tr>
+        <th colspan="2">Action</th>
+        <th colspan="2">Routes</th>
+    </tr>
+    <% _.forEach(actions, function(action, a_index){
+    var row = 0;
+    var routes = action.get_config('routes');
+   _.each(routes, function(path, verb){
+    if (++row == 1 ){
+    %>
+    <tr>
+        <td><%= action.get_config('name') %></td>
+        <td><%= action.get_config('root').substr(site_root.length) %></td>
+        <td><b><%= verb %></b></td>
+        <td>
+            <% if (_.isArray(path)){ %>
+            <ol>
+                <% path.forEach(function(p){ %>
+                <li><%= p %></li>
+                <% }) // end path %>
+            </ol>
+            <% } else { %>
+            <%= path %>
+            <% } %>
+        </td>
+    </tr>
+
+    <% } else { %>
+
+    <% } // end if row %>
+    <% }) %>
+    <% }) // actions.forEach %>
+</table>

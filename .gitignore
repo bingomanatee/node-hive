@@ -1,3 +1,4 @@
 /node_modules/
 /.idea/
 .DS_Store
+/frames/hive_introspect/node_modules/
