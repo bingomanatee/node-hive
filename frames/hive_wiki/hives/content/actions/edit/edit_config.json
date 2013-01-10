@@ -1,8 +1,7 @@
 {
 
 	"routes": {
-		"get": ["/wiki/article/new", "/wiki/article/new/:topic"],
-		"put": "/wiki/article"
+		"get": "/wiki/a/:topic/:name/edit"
 	},
 
 	"javascript_head": [
@@ -11,21 +10,21 @@
 		"/js/hive_wiki/vendor/angular.min.js",
 		"/js/hive_wiki/vendor/angular-resource.js",
 		"/js/hive_wiki/model/article.js",
-		"/js/hive_wiki/add/create_article.js"
+		"/js/hive_wiki/edit/edit_article.js"
 	],
 
 	"javascript": [
 	],
 
 	"css": [
-		"/css/hive_wiki/add/create_article.css"
+		"/css/hive_wiki/edit/edit_article.css"
 	],
 
 	"layout_name": "hive_wiki",
 
 	"static": {
-		"js":  "/js/hive_wiki/add",
-		"css": "/css/hive_wiki/add"
+		"js":  "/js/hive_wiki/edit",
+		"css": "/css/hive_wiki/edit"
 	}
 
 }

@@ -3,6 +3,7 @@ var util = require('util');
 var path = require('path');
 var fs = require('fs');
 var _DEBUG = false;
+var marked = require('marked');
 
 /* ************************************
  * 
@@ -31,6 +32,7 @@ module.exports = {
 				ctx.$go('/wiki/articles', cb);
 			} else {
 				ctx.out.set('article', article);
+				ctx.out.set('html', marked(article.content));
 				cb();
 			}
 		})

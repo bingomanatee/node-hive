@@ -1,0 +1,11 @@
+{
+	"name":         "hive-wiki",
+	"version":      "0.0.1",
+	"private":      true,
+	"dependencies": {
+					"gate": "*",
+					"hive-loader": "*",
+					"underscore": "*",
+					"marked": "*"
+	}
+}

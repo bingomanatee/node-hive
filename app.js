@@ -3,8 +3,6 @@
  */
 
 var express = require('express')
-	, routes = require('./routes')
-	, user = require('./routes/user')
 	, http = require('http')
 	, path = require('path')
 	, util = require('util')
@@ -32,9 +30,6 @@ app.configure(function () {
 app.configure('development', function () {
 	app.use(express.errorHandler());
 });
-
-app.get('/', routes.index);
-app.get('/users', user.list);
 
 server = http.createServer(app);
 server.on('close', function () {

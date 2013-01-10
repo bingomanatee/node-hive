@@ -1,4 +1,4 @@
-function Page_Editor($scope, $filter, $compile, Articles) {
+function Page_Editor($scope, $filter, $compile, Articles, article_id) {
 
 	$scope.content = ' ' + Math.random();
 	$scope.name = '';
@@ -52,6 +52,10 @@ function Page_Editor($scope, $filter, $compile, Articles) {
 			console.log(ex_result);
 		})
 	}
+
+	$scope.article_id = function () {
+		return article_id;
+	};
 
 	$scope.$watch('name', _start_update_exists);
 
@@ -142,5 +146,14 @@ function Page_Editor($scope, $filter, $compile, Articles) {
 
 var page_creator_app = angular.module('page_creator', ['articleServices']);
 
-page_creator_app.controller('page_editor', Page_Editor, ['$scope', '$filter', '$compile', 'Articles']);
+
+angular.module('articleServices', ['ngResource']).factory('Articles',
+	function ($resource) {
+		return  $resource('/wiki/article/:_id', {_id: '@id', 'name': '@name', 'topic': '@topic'},
+
+			{add: {method: 'PUT'}
+			});
+	});
+
+page_creator_app.controller('page_editor', Page_Editor, ['$scope', '$filter', '$compile', 'Articles', 'article_id']);
 

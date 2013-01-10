@@ -19,6 +19,7 @@
             <td><%= article.topic %></td>
             <td><%= article.intro %></td>
             <td><a class="btn" href="/wiki/a/<%= article.topic %>/<%= article.name %>">Go</a></td>
+            <td><a class="btn" href="/wiki/article/<%= article.topic %>/<%= article.name %>/edit">Edit</a></td>
         </tr>
     <% }) %>
 </table>

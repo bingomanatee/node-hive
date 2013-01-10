@@ -1,3 +1,18 @@
 <h1>Article &quot;<%= article.title %>&quot;</h1>
 
-<article><%= article.content %></article>
+<article><%- html %></article>
+
+
+<div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+        <a class="brand" href="#">Article:</a>
+        <ul class="nav">
+            <li>
+                <button class="btn btn-primary"
+                        onClick="document.location= '/wiki/article/edit/<%= article.topic %>/<%= article.name %>'"><i
+                        class="icon-pencil "></i>&nbsp; Edit
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
