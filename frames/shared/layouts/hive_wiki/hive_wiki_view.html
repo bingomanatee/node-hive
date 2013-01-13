@@ -69,36 +69,9 @@
         <div class="span3">
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
-                    <% if ($menus.left_nav.title) { %>
-                    <li><a href="<%- $menus.left_nav.link || '#' %>">LEFT NAV TITLE <%= $menus.left_nav.title %></a></li>
-                    <% } // menu has title %>
-                    <% _.each($menus.left_nav.items,function(item){ %>
-                      <% if (item.type == 'item'){ %>
-                    <li><a href="<%= item.link || '#' %>"><%= item.title %></a></li>
-                    <% } else { %>
+                    <% var menu = $menus.left_nav %>
+                    <% include left_nav.html %>
 
-                    <% if (item.title) { %>
-                    <li class="nav-header"><% if (item.link) {
-                        %><a href="<%- item.link %>"> <%= item.title %></a>
-                        <% } else { %>
-                        <%= item.title %>
-                        <% } %>
-                    </li>
-                    <% } // menu has title %>
-
-                    <% _.each(item.items, function(subitem){ %>
-                    <li>
-                        <% if (subitem.link) {
-                        %><a href="<%- subitem.link %>"> <%= subitem.title %></a>
-                        <% } else { %>
-                        <%= subitem.title %>
-                        <% } %>
-
-                    </li>
-                    <% }) // end subitems %>
-
-                    <% } // end item.type if %>
-                    <% }) %>
 
                     <li class="nav-header">Sidebar</li>
                     <li class="active"><a href="/wiki/articles">Articles</a></li>
