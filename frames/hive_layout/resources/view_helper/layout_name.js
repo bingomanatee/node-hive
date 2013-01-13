@@ -12,7 +12,7 @@ module.exports = function (apiary, cb) {
 			return ctx.$action.get_config('layout_name');
 		},
 
-		weight:-100,
+		weight:-1000,
 
 		respond: function (ctx, output, cb) {
 			if (!output.layout_name){

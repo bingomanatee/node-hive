@@ -1,11 +1,11 @@
 {
-	"name":         "hive-wiki-frame",
+	"name":         "shared-frame",
 	"version":      "0.0.1",
 	"private":      true,
 	"dependencies": {
 					"gate": "*",
-					"hive-loader": ">=0.0.1",
+					"hive-loader": "*",
 					"underscore": "*",
-					"marked": "*"
+					"hive-wiki": ">=0.0.1"
 	}
 }

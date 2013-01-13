@@ -69,15 +69,40 @@
         <div class="span3">
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
+                    <% if ($menus.left_nav.title) { %>
+                    <li><a href="<%- $menus.left_nav.link || '#' %>">LEFT NAV TITLE <%= $menus.left_nav.title %></a></li>
+                    <% } // menu has title %>
+                    <% _.each($menus.left_nav.items,function(item){ %>
+                      <% if (item.type == 'item'){ %>
+                    <li><a href="<%= item.link || '#' %>"><%= item.title %></a></li>
+                    <% } else { %>
+
+                    <% if (item.title) { %>
+                    <li class="nav-header"><% if (item.link) {
+                        %><a href="<%- item.link %>"> <%= item.title %></a>
+                        <% } else { %>
+                        <%= item.title %>
+                        <% } %>
+                    </li>
+                    <% } // menu has title %>
+
+                    <% _.each(item.items, function(subitem){ %>
+                    <li>
+                        <% if (subitem.link) {
+                        %><a href="<%- subitem.link %>"> <%= subitem.title %></a>
+                        <% } else { %>
+                        <%= subitem.title %>
+                        <% } %>
+
+                    </li>
+                    <% }) // end subitems %>
+
+                    <% } // end item.type if %>
+                    <% }) %>
+
                     <li class="nav-header">Sidebar</li>
                     <li class="active"><a href="/wiki/articles">Articles</a></li>
                     <li><a href="/wiki/article/new">New</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="nav-header">Sidebar</li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="nav-header">Sidebar</li>
-                    <li><a href="#">Link</a></li>
                 </ul>
             </div><!--/.well -->
         </div><!--/span-->
@@ -96,22 +121,8 @@
 
 <!-- Le javascript
 ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
 <script src="/hive_wiki/js/vendor/jquery-1.8.3.min.js"></script>
 <script src="/hive_wiki/js/vendor/bootstrap.js"></script>
-<!--
-<script src="/hive_wiki/js/bootstrap-transition.js"></script>
-<script src="/hive_wiki/js/bootstrap-alert.js"></script>
-<script src="/hive_wiki/js/bootstrap-modal.js"></script>
-<script src="/hive_wiki/js/bootstrap-dropdown.js"></script>
-<script src="/hive_wiki/js/bootstrap-scrollspy.js"></script>
-<script src="/hive_wiki/js/bootstrap-tab.js"></script>
-<script src="/hive_wiki/js/bootstrap-tooltip.js"></script>
-<script src="/hive_wiki/js/bootstrap-popover.js"></script>
-<script src="/hive_wiki/js/bootstrap-button.js"></script>
-<script src="/hive_wiki/js/bootstrap-collapse.js"></script>
-<script src="/hive_wiki/js/bootstrap-carousel.js"></script>
-<script src="/hive_wiki/js/bootstrap-typeahead.js"></script>
--->
+
 </body>
 </html>

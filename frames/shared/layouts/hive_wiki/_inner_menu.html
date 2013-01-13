@@ -1,0 +1,7 @@
+
+<% if (item.title) { %>
+<li class="nav-header"><a href="<%- item.link || '#' %>">item.title</a></li>
+<% } // end item.title %>
+<% item.items.forEach(function(subitem){ %>
+<li><a href="<%- subitem.link || '#' %>"><%= subitem.title %></a></li>
+<% }) // end item.itmes.forEach %>
