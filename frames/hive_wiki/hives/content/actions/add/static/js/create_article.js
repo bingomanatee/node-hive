@@ -20,7 +20,7 @@ function Page_Editor($scope, $filter, $compile, Articles) {
 			tags:     $scope.tags,
 			content:  $scope.content,
 			topic:    $scope.topic,
-			is_topic: $scope.is_topic
+			is_topic: !!$scope.is_topic
 		};
 
 		if ($scope.is_topic) {

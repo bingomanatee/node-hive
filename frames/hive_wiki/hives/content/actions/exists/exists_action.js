@@ -19,7 +19,7 @@ module.exports = {
 		var article_model = this.model('hive_wiki_article');
 
 		article_model.exists(ctx.topic, ctx.name, function(err, ex){
-			ctx.out.set('exists', ex);
+			ctx.$out.set('exists', ex);
 			cb();
 		})
 	}

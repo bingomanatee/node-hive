@@ -21,6 +21,7 @@ module.exports = function (apiary, callback) {
 	var article_link_schema = require(path.resolve(__dirname, 'schema/article_link.json'));
 	article_schema.version = [mongoose.Schema(article_entry_schema)];
 	article_schema.link_to = [mongoose.Schema(article_link_schema)];
+	article_schema._archives = [article_entry_schema];
 
 	Mongoose_Model(
 		{
@@ -30,7 +31,7 @@ module.exports = function (apiary, callback) {
 			},
 
 			make_id: function (topic, name) {
-				if (_.isObject(topic)){
+				if (_.isObject(topic)) {
 					name = topic.name;
 					topic = topic.topic;
 				}
@@ -38,7 +39,7 @@ module.exports = function (apiary, callback) {
 				return util.format('%s:%s', topic, name);
 			},
 
-			exists: function(topic, name, cb){
+			exists: function (topic, name, cb) {
 				this.count({name: name, topic: topic}, cb);
 			},
 
@@ -47,8 +48,8 @@ module.exports = function (apiary, callback) {
 					return  cb(new Error('cannot find article - topic and/or name missing: ' + topic + '/' + name));
 				}
 				var self = this;
-				this.get(this.make_id(topic, name), function(err, article){
-					if (article){
+				this.get(this.make_id(topic, name), function (err, article) {
+					if (article) {
 						return cb(null, article);
 					} else {
 						self.find_one({name: name, topic: topic}, cb);

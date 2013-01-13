@@ -23,45 +23,36 @@ function Page_Editor($scope, $filter, $compile, Articles, article_id) {
 			is_topic: $scope.is_topic
 		};
 
-		if ($scope.is_topic) {
-			article.topic = $scope.name;
-			article.name = '';
-		}
+		console.log('sending article ', article);
 
-		Articles.add(article, function () {
+		Articles.update(article, function (new_article) {
+			console.log('updated article ', new_article);
 			document.location = "/wiki/articles";
 		})
 	};
 
-	var sud;
+	var c_link_template = _.template('/wiki/a/<%= topic %>/<%= name %>');
 
-	function _start_update_exists() {
-		if (sud) {
-			clearTimeout(sud);
-		}
-
-		var name = $scope.name;
-		var topic = $scope.topic;
-		var is_topic = is_topic;
-
-		if (!(name && topic)) {
-			return;
-		}
-
-		Articles.exists({name: name, topic: topic}, function (err, ex_result) {
-			console.log(ex_result);
-		})
-	}
+	$scope.cancel = function() {
+		document.location = c_link_template({name: $scope.name, topic: $scope.topic });
+	};
 
 	$scope.article_id = function () {
 		return article_id;
 	};
 
-	$scope.$watch('name', _start_update_exists);
-
-	$scope.$watch('topic', _start_update_exists);
-
-	$scope.$watch('is_topic', _start_update_exists);
+	$scope.$watch('article_id()', function(aid){
+		if (aid.name && aid.topic){
+			Articles.get({topic: aid.topic, name: aid.name}, function( article){
+				console.log(article.valueOf());
+				console.log('article name', article.name);
+				console.log('article.topic', article.topic);
+				if (!article.error){
+					_.extend($scope, article);
+				}
+			})
+		}
+	});
 
 	$scope.content_min_length = 10;
 
@@ -145,15 +136,6 @@ function Page_Editor($scope, $filter, $compile, Articles, article_id) {
 }
 
 var page_creator_app = angular.module('page_creator', ['articleServices']);
-
-
-angular.module('articleServices', ['ngResource']).factory('Articles',
-	function ($resource) {
-		return  $resource('/wiki/article/:_id', {_id: '@id', 'name': '@name', 'topic': '@topic'},
-
-			{add: {method: 'PUT'}
-			});
-	});
 
 page_creator_app.controller('page_editor', Page_Editor, ['$scope', '$filter', '$compile', 'Articles', 'article_id']);
 

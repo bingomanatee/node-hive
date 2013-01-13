@@ -31,8 +31,8 @@ module.exports = {
 				ctx.$flash('error', util.format('cannot find article %s/%s', ctx.topic, ctx.name));
 				ctx.$go('/wiki/articles', cb);
 			} else {
-				ctx.out.set('article', article);
-				ctx.out.set('html', marked(article.content));
+				ctx.$out.set('article', article);
+				ctx.$out.set('html', marked(article.content));
 				cb();
 			}
 		})

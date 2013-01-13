@@ -10,6 +10,14 @@ var _DEBUG = false;
 
 /* ******* CLOSURE ********* */
 
+function _trim_article(article) {
+	if (article.toJSON) {
+		article = article.toJSON();
+	}
+	delete article.archive;
+	return article;
+}
+
 /* ********* EXPORTS ******** */
 
 module.exports = {
@@ -17,9 +25,9 @@ module.exports = {
 	on_get_process: function (ctx, cb) {
 		if (_DEBUG) console.log('getting article %s %s', ctx.topic, ctx.name);
 		var article_model = this.model('hive_wiki_article');
-		article_model.get_article(ctx.topic, ctx.name, function(err, article){
+		article_model.get_article(ctx.topic, ctx.name, function (err, article) {
 			if (_DEBUG) console.log('article gotten: %s', util.inspect(article));
-			ctx.out.set('article',  article ? article : {error: 'cannot find article', name: ctx.name, topic: ctx.topic});
+			ctx.$out.setAll(article ? _trim_article(article) : {error: 'cannot find article', name: ctx.name, topic: ctx.topic});
 			cb();
 		})
 	},
@@ -39,10 +47,41 @@ module.exports = {
 		article._id = article_model.make_id(article);
 
 		article_model.put(article, function (err, article) {
-			if (!article) article = err;
-			ctx.out.setAll(article);
+			if (article) {
+				ctx.$out.setAll(_trim_article(article));
+			} else {
+				ctx.$out.setAll(err);
+			}
 			cb();
 		});
+	},
+
+	on_post_process: function (ctx, cb) {
+
+		var article_model = this.model('hive_wiki_article');
+
+		article_model.get_article(ctx.topic, ctx.name, function (err, article) {
+			if (err) {
+				ctx.$out.setAll(err);
+				cb();
+			} else {
+				var new_data = {
+					content: ctx.content,
+					tags:    ctx.tags,
+					title:   ctx.title,
+					html:    ctx.html
+				};
+
+				article_model.archive(article._id, ['title', 'content', 'tags', 'html'], new_data, function (err, new_article) {
+					if (err) {
+						ctx.$out.setAll(err);
+					} else {
+						ctx.$out.setAll(_trim_article(new_article))
+					}
+					cb();
+				})
+			}
+		})
 	}
 
-} // end exports
+}; // end exports

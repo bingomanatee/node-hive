@@ -16,10 +16,10 @@ module.exports = {
 
 	on_input: function(ctx, cb){
 
-		ctx.out.set('site_root', this.get_config('apiary').get_config('root'));
+		ctx.$out.set('site_root', this.get_config('apiary').get_config('root'));
 		var actions = this.model('$actions').all().records();
 		if (_DEBUG) console.log('actions: ', util.inspect(actions, false, 0));
-		ctx.out.set('actions',  actions);
+		ctx.$out.set('actions',  actions);
 		cb();
 	}
 }; // end exports

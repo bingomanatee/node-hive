@@ -3,21 +3,22 @@
 <table class="table">
     <thead>
     <tr>
-        <th>_id</th>
-        <th>Name</th>
         <th>Title</th>
+        <th>Name</th>
         <th>Topic</th>
         <th>Introduction</th>
+        <th>Is Topic</th>
+        <th>&nbsp;</th>
         <th>&nbsp;</th>
     </tr>
     </thead>
     <% articles.forEach(function(article){ %>
         <tr>
-            <td><%= article._id %></td>
+            <td><%- article.is_topic? '<b>' + article.title + '</b>' : article.title %></td>
             <td><%= article.name %></td>
-            <td><%= article.title %></td>
             <td><%= article.topic %></td>
             <td><%= article.intro %></td>
+            <td><%= article.is_topic %></td>
             <td><a class="btn" href="/wiki/a/<%= article.topic %>/<%= article.name %>">Go</a></td>
             <td><a class="btn" href="/wiki/article/<%= article.topic %>/<%= article.name %>/edit">Edit</a></td>
         </tr>
