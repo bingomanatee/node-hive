@@ -1,8 +1,7 @@
 {
 
 	"routes": {
-		"get": ["/wiki/article/new", "/wiki/article/new/:topic"],
-		"put": "/wiki/article"
+		"get": ["/wiki/article/new", "/wiki/article/new/:topic"]
 	},
 
 	"javascript_head": [

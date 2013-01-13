@@ -27,14 +27,32 @@ module.exports = function (apiary, cb) {
 		respond: function (context, output, cb) {
 			if (_DEBUG) console.log('adding menus');
 			var wiki_model = apiary.model('hive_wiki_article');
-			var wiki_menu = new hive_menu.Menu({title: "Wiki", weight: -900});
+			var wiki_manage_menu = new hive_menu.Menu({
+				title:  'Manage Wiki',
+				weight: -800,
+				items:  [
+					{
+						title: 'Articles',
+						link: '/wiki/articles',
+						weight: 0
+					},
+					{
+						title: 'New',
+						link: '/wiki/article/new',
+						weight: 1
+					}
+				]
+			});
+			output.$menus.left_nav.add(wiki_manage_menu);
+
 			wiki_model.topics(function (err, topics) {
+				var wiki_menu = new hive_menu.Menu({title: "Wiki", weight: -900});
 				topics = _.sortBy(topics, 'title');
 				if (_DEBUG) console.log('-------- topics: %s', util.inspect(topics));
 				_.each(topics, function (topic) {
 					wiki_menu.add({title: topic.title, name: 'wiki_topic_' + topic.topic, link: util.format('/wiki/t/%s', topic.topic)});
 				});
-				output.$menus.left_nav.items.push(wiki_menu);
+				output.$menus.left_nav.add(wiki_menu);
 				if (_DEBUG) console.log('output after wiki menu added: %s', util.inspect(output, true, 5));
 				cb();
 			})

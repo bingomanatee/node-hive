@@ -18,18 +18,16 @@ module.exports = function (apiary, cb) {
 		name: 'nav_menu_view_helper',
 
 		test: function (ctx, output) {
-			if (_DEBUG) console.log('inmvh: testing layout name %s', output.layout_name);
 			return output.layout_name == 'hive_wiki';
 		},
 
-		weight: -900,
+		weight: 1000,
 
 		respond: function (ctx, output, cb) {
-			output.$menus = {
-				left_nav: new hive_menu.Menu({name: 'left_nav_menu', items: [{link: '/', title: "Home", weight: -10000}]}),
-				top_nav: new hive_menu.Menu({name: 'top_nav_menu'})
-			};
-			if (_DEBUG) console.log('nav menu: %s', util.inspect(output.$menus.left_nav.prototype));
+
+			console.log('$menus: %s', util.inspect(output.$menus, true, 4));
+			output.$menus.left_nav = output.$menus.left_nav.toJSON();
+			output.$menus.top_nav = output.$menus.top_nav.toJSON();
 			cb();
 		}
 	};
