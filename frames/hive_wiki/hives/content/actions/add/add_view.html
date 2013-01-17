@@ -9,13 +9,15 @@
 
                 <div class="controls">
                     <input type="text" id="title" autocomplete="off" name="title" ng-required="true"
-                    class="input-xxlarge"
+                           class="input-xxlarge"
                            ng-required="true"
                            ng-minlength="3"
                            ng-model="title"/>
                     <span class="help-inline " ng-show="prelim.title.$error.required">Required</span>
                     <span class="help-inline "
                           ng-show="prelim.title.$error.minlength">Must be at least 3 characters</span>
+                   <br /> <span class="help-block">The Title is displayed in menus and the page
+                        content.</span>
                 </div>
             </div>
 
@@ -35,6 +37,8 @@
                         only letters,numbers,&quot;-&quot;, &quot;_&quot;</span>
                     <span class="help-inline "
                           ng-show="prelim.name.$error.minlength">Must be at least 3 characters</span>
+                    <span class="help-block">The Name is used in wiki-links; it is the "code" of the article and must
+                   be only letters, numbers and underscores. </span>
                 </div>
             </div>
 
@@ -44,9 +48,15 @@
                 <div class="controls">
                     <textarea id="intro" name="intro" rows="4" class="input-xxlarge" ng-model="intro">
                     </textarea>
+                    <span class="help-block">The introduction text is used in topic menus. </span>
                 </div>
             </div>
 
+            <p><b>Topic articles</b> are &quot;Content Groups&quot; under which other articles are grouped.
+                An articles' name must be unique within their topic, and each topic articles' name must be unique
+                in the context of other topic articles.
+            </p>
+            <% if (topics.length) { %>
             <div class="control-group">
                 <label class="control-label" for="title">Topic</label>
 
@@ -70,6 +80,9 @@
                     </label>
                 </div>
             </div>
+            <% } else { %>
+            <p>This article <b>Must</b> be a topic article, as there are no other topic articles in this site yet.</p>
+            <% } %>
 
             <div class="tabs">
                 <ul class="nav nav-tabs">
@@ -133,25 +146,36 @@
                 </ul>
             </div>
 
-        <div class="navbar navbar-inverse">
-            <div class="navbar-inner">
-                <ul class="nav">
-                    <li>
-                        <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li>
-                        <button ng-show="prelim.$valid" class="btn btn-success" ng-click="save()"><i
-                                class="icon-plus "></i>&nbsp;
-                            Save
-                        </button>
-                    </li>
-                    <li>
-                        <a class="#">{{ error_message() }}</a>
-                    </li>
-                </ul>
+            <div class="navbar navbar-inverse">
+                <div class="navbar-inner">
+                    <ul class="nav">
+                        <li>
+                            <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                        </li>
+                        <li class="divider-vertical"></li>
+                        <li>
+                            <button ng-show="prelim.$valid" class="btn btn-success" ng-click="save()"><i
+                                    class="icon-plus "></i>&nbsp;
+                                Save
+                            </button>
+                        </li>
+                        <li>
+                            <a class="#">{{ error_message() }}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
         </form>
     </div>
 </div>
+
+<% if (topics.length) { %>
+<script language="javascript">
+    //@TODO: make topic sticky in session
+    page_creator_app.value('is_topic', false).value('topic', '<%= topics[0].topic %>')
+</script>
+<% } else { %>
+<script language="javascript">
+    page_creator_app.value('is_topic', true);
+</script>
+<% } %>

@@ -44,8 +44,8 @@ server.listen(app.get('port'), function () {
 
 	console.log('initializing apiary');
 	apiary.init(function () {
-		var prefixes = apiary.model('$static_prefixes').all().records();
-		console.log('static prefixes: %s', util.inspect(prefixes));
+	//	var prefixes = apiary.model('$static_prefixes').all().records();
+		// console.log('static prefixes: %s', util.inspect(prefixes));
 		app.use(apiary.Static.resolve);
 		apiary.serve(app, server);
 	});

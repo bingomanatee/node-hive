@@ -2,7 +2,7 @@ var _ = require('underscore');
 var util = require('util');
 var path = require('path');
 var fs = require('fs');
-var _DEBUG = false;
+var _DEBUG = true;
 
 /* ************************************
  * 
@@ -23,11 +23,12 @@ function _trim_article(article) {
 module.exports = {
 
 	on_get_process: function (ctx, cb) {
-		if (_DEBUG) console.log('getting article %s %s', ctx.topic, ctx.name);
+		if (_DEBUG) console.log('getting topic %s', ctx.topic);
 		var article_model = this.model('hive_wiki_article');
 
 		function _on_article(err, article) {
 			if (err) {
+				if (_DEBUG) console.log('error getting article: %s', err.message);
 				return cb(err);
 			}
 			if (_DEBUG) console.log('article gotten: %s', util.inspect(article));
@@ -35,7 +36,7 @@ module.exports = {
 			cb();
 		}
 
-		article_model.get_article(ctx.topic, ctx.name, _on_article)
+		article_model.get_topic(ctx.topic, _on_article)
 	},
 
 	on_put_process: function (ctx, cb) {
@@ -79,7 +80,7 @@ module.exports = {
 					html:    ctx.html
 				};
 
-				article_model.archive(article._id, ['title', 'content', 'tags', 'html'], new_data, function (err, new_article) {
+				article_model.archive(article._id, ['title', 'content', 'intro', 'tags', 'html'], new_data, function (err, new_article) {
 					if (err) {
 						ctx.$out.setAll(err);
 					} else {

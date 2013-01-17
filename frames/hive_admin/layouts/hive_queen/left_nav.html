@@ -1,0 +1,40 @@
+<div class="well sidebar-nav">
+    <ul class="nav nav-list">
+        <% if (menu.title) { %>
+        <li>
+            <% if (menu.link){ %>
+            <a href="<%- menu.link %>"><%= menu.title %></a>
+            <% } else { %>
+            <%= menu.title %>
+            <% } %>
+        </li>
+        <% } // menu has title %>
+        <% _.each(menu.items,function(item){ %>
+        <% if (item.type == 'item'){ %>
+        <li><a href="<%= item.link || '#' %>"><%= item.title %></a></li>
+        <% } else { %>
+
+        <% if (item.title) { %>
+        <li class="nav-header"><% if (item.link) {
+            %><a href="<%- item.link %>"> <%= item.title %></a>
+            <% } else { %>
+            <%= item.title %>
+            <% } %>
+        </li>
+        <% } // menu has title %>
+
+        <% _.each(item.items, function(subitem){ %>
+        <li>
+            <% if (subitem.link) {
+            %><a href="<%- subitem.link %>"> <%= subitem.title %></a>
+            <% } else { %>
+            <%= subitem.title %>
+            <% } %>
+
+        </li>
+        <% }) // end subitems %>
+
+        <% } // end item.type if %>
+        <% }) %>
+    </ul>
+</div><!--/.well -->

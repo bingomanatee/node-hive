@@ -7,4 +7,13 @@ angular.module('articleServices', ['ngResource']).factory('Articles',
 				exists: {method: 'GET'},
 				get: {method: 'GET'}
 			});
+	}).factory('Topics',
+	function ($resource) {
+		return  $resource('/wiki/rest/topic/:topic/', {'topic': 'topic'},
+			{
+				add:    {method: 'PUT'},
+				update: {method: 'POST'},
+				exists: {method: 'GET'},
+				get: {method: 'GET'}
+			});
 	})

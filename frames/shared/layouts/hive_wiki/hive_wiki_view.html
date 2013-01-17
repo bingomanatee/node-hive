@@ -70,11 +70,12 @@
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
                     <% var menu = $menus.left_nav %>
-                    <% include left_nav.html %>
+                  <% include left_nav.html %>
                 </ul>
             </div><!--/.well -->
         </div><!--/span-->
         <div class="span9">
+            <%- 'mesages' // messages() %>
             <%- body %>
         </div><!--/span-->
     </div><!--/row-->

@@ -1,0 +1,16 @@
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+    color: black;
+}
+.sidebar-nav {
+    padding: 9px 0;
+}
+
+.nabar.navbar-inverse,
+.nabar.navbar-inverse *,
+.navbar.navbar-inverse .navbar-inner *   {
+    background-color: rgb(102, 51, 0) !important;
+    color: white !important;
+    border: none !important;
+}

@@ -2,7 +2,7 @@ var _ = require('underscore');
 var util = require('util');
 var path = require('path');
 var fs = require('fs');
-var _DEBUG = true;
+var _DEBUG = false;
 var hive_menu = require('hive-menu');
 
 /* ************************************
@@ -16,10 +16,10 @@ var hive_menu = require('hive-menu');
 module.exports = function (apiary, cb) {
 
 	var helper = {
-		name: 'hive_nav_menu_helper',
+		name: 'hive_wiki_nav_menu_helper',
 
 		test: function (context, output) {
-			return output.layout_name == 'hive_wiki';
+			return _.contains(['hive_queen', 'hive_wiki'], output.layout_name);
 		},
 
 		weight: -800,

@@ -13,14 +13,21 @@
     </tr>
     </thead>
     <% articles.forEach(function(article){ %>
-        <tr>
-            <td><%- article.is_topic? '<b>' + article.title + '</b>' : article.title %></td>
-            <td><%= article.name %></td>
-            <td><%= article.topic %></td>
-            <td><%= article.intro %></td>
-            <td><%= article.is_topic %></td>
-            <td><a class="btn" href="/wiki/a/<%= article.topic %>/<%= article.name %>">Go</a></td>
-            <td><a class="btn" href="/wiki/article/<%= article.topic %>/<%= article.name %>/edit">Edit</a></td>
-        </tr>
+    <tr>
+        <td><%- article.is_topic? '<b>' + article.title + '</b>' : article.title %></td>
+        <td><%= article.name %></td>
+        <td><%= article.topic %></td>
+        <td><%= article.intro %></td>
+        <td><%= article.is_topic %></td>
+        <td><a class="btn" href="/wiki/a/<%= article.topic %>/<%= article.name %>">Go</a></td>
+        <td>
+            <% if (article.is_topic) { %>
+            <a class="btn"  href="/wiki/t/<%= article.topic %>/edit">Edit</a>
+            <% } else { %>
+            <a class="btn"
+               href="/wiki/a/<%= article.topic %>/<%= article.name %>/edit">Edit</a>
+            <% } %>
+        </td>
+    </tr>
     <% }) %>
 </table>

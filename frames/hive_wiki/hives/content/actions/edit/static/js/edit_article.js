@@ -1,4 +1,4 @@
-function Page_Editor($scope, $filter, $compile, Articles, article_id) {
+function Page_Editor($scope, $filter, $compile, Articles, Topics, article_id) {
 
 	$scope.content = ' ' + Math.random();
 	$scope.name = '';
@@ -17,6 +17,7 @@ function Page_Editor($scope, $filter, $compile, Articles, article_id) {
 		var article = {
 			title:    $scope.title,
 			name:     $scope.name,
+			intro:    $scope.intro,
 			tags:     $scope.tags,
 			content:  $scope.content,
 			topic:    $scope.topic,
@@ -25,15 +26,20 @@ function Page_Editor($scope, $filter, $compile, Articles, article_id) {
 
 		console.log('sending article ', article);
 
-		Articles.update(article, function (new_article) {
-			console.log('updated article ', new_article);
-			document.location = "/wiki/articles";
-		})
+		if ($scope.is_topic) {
+			Topics.update(article, function (topic) {
+				document.location = _.template("/wiki/a/<" + "%= topic %" + ">/<" + "%= name %" + ">")(article);
+			})
+		} else {
+			Articles.update(article, function (article) {
+				document.location = _.template("/wiki/a/<" + "%= topic %" + ">/<" + "%= name %" + ">")(article);
+			})
+		}
 	};
 
 	var c_link_template = _.template('/wiki/a/<%= topic %>/<%= name %>');
 
-	$scope.cancel = function() {
+	$scope.cancel = function () {
 		document.location = c_link_template({name: $scope.name, topic: $scope.topic });
 	};
 
@@ -41,16 +47,21 @@ function Page_Editor($scope, $filter, $compile, Articles, article_id) {
 		return article_id;
 	};
 
-	$scope.$watch('article_id()', function(aid){
-		if (aid.name && aid.topic){
-			Articles.get({topic: aid.topic, name: aid.name}, function( article){
+	$scope.$watch('article_id()', function (aid) {
+		if (!aid.is_topic && (aid.name && aid.topic)) {
+			function _on_article(article) {
 				console.log(article.valueOf());
 				console.log('article name', article.name);
 				console.log('article.topic', article.topic);
-				if (!article.error){
+				if (!article.error) {
 					_.extend($scope, article);
 				}
-			})
+			}
+
+			Articles.get({topic: aid.topic, name: aid.name}, _on_article)
+		} else if (aid.is_topic && aid.topic) {
+			console.log('getting ', aid);
+			Topics.get({topic: aid.topic}, _on_article)
 		}
 	});
 

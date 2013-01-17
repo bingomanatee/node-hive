@@ -10,14 +10,17 @@
     page_creator_app.factory('article_id', function () {
         return {
             topic: '<%= topic %>',
-            name:  '<%= name %>'
+            is_topic: '<%= is_topic %>',
+            name:  '<%= is_topic ? '' : name %>'
         };
     });
 </script>
 
 <div ng-app="page_creator" class="page_creator">
     <div ng-controller="page_editor">
-        <h1>Edit Article &quot;{{ title }}&quot;</h1>
+        <h1>Edit <span ng-switch on="is_topic"><span ng-switch-when="true">Topic</span><span
+                ng-switch-default>Article</span></span> &quot;{{ title
+            }}&quot;</h1>
         <form name="prelim" class="form-horizontal">
 
             <div class="control-group">

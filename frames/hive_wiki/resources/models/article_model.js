@@ -35,12 +35,18 @@ module.exports = function (apiary, callback) {
 					name = topic.name;
 					topic = topic.topic;
 				}
+				if (!name) name = '';
 
 				return util.format('%s:%s', topic, name);
 			},
 
 			exists: function (topic, name, cb) {
 				this.count({name: name, topic: topic}, cb);
+			},
+
+			get_topic: function(topic, cb){
+				console.log('get_topic: %s', topic);
+				this.find_one({topic: topic, is_topic: true}, cb);
 			},
 
 			get_article: function (topic, name, cb) {
@@ -50,7 +56,7 @@ module.exports = function (apiary, callback) {
 				var self = this;
 				this.get(this.make_id(topic, name), function (err, article) {
 					if (article) {
-						return cb(null, article);
+						 cb(null, article);
 					} else {
 						self.find_one({name: name, topic: topic}, cb);
 					}

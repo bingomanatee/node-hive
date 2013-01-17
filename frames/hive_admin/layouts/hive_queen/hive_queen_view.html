@@ -9,16 +9,8 @@
 
     <!-- Le styles -->
     <link href="/hive_in/css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-        body {
-            padding-top: 60px;
-            padding-bottom: 40px;
-        }
-        .sidebar-nav {
-            padding: 9px 0;
-        }
-    </style>
     <link href="/hive_in/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/hive_in/css/style.css" rel="stylesheet">
     <% css.forEach(function(css){%>
     <link href="<%= css %>" rel="stylesheet" />
     <% }) %>
@@ -49,7 +41,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">Project name</a>
+            <a class="brand" href="#">Hive Site Manager</a>
             <div class="nav-collapse collapse">
                 <p class="navbar-text pull-right">
                     Logged in as <a href="#" class="navbar-link">Username</a>
@@ -65,20 +57,11 @@
 </div>
 
 <div class="container-fluid">
+
     <div class="row-fluid">
         <div class="span3">
-            <div class="well sidebar-nav">
-                <ul class="nav nav-list">
-                    <li class="nav-header">Introspect</li>
-                    <li><a href="/in/routes">Routes</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="nav-header">Sidebar</li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="nav-header">Sidebar</li>
-                    <li><a href="#">Link</a></li>
-                </ul>
-            </div><!--/.well -->
+            <% var menu = $menus.left_nav %>
+            <% include left_nav.html %>
         </div><!--/span-->
         <div class="span9">
             <%- body %>

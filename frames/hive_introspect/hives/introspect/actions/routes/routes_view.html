@@ -2,7 +2,7 @@
 <p>Routes for Apiary <tt><b><%= site_root %></b></tt></p>
 <table>
     <tr>
-        <th colspan="2">Action</th>
+        <th>Action</th>
         <th colspan="2">Routes</th>
     </tr>
     <% _.forEach(actions, function(action, a_index){
@@ -12,7 +12,6 @@
     if (++row == 1 ){
     %>
     <tr>
-        <td><%= action.get_config('name') %></td>
         <td><%= action.get_config('root').substr(site_root.length) %></td>
         <td><b><%= verb %></b></td>
         <td>

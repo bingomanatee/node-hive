@@ -1,0 +1,24 @@
+<h1>Topic &quot;<%= article.title %>&quot;</h1>
+
+<article><%- html %></article>
+
+
+<div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+        <a class="brand" href="#">Article:</a>
+        <ul class="nav">
+            <li>
+                <button class="btn btn-success"
+                        onClick="document.location= '/wiki/a/<%= article.topic %>'"><i
+                        class="icon-pencil "></i>&nbsp; Add Article
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-primary"
+                        onClick="document.location= '/wiki/a/<%= article.topic %>'"><i
+                        class="icon-pencil "></i>&nbsp; Edit
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>

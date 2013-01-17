@@ -10,7 +10,8 @@ module.exports = {
 	},
 
 	on_get_process: function (ctx, cb) {
-		ctx.$out.setAll({topic: ctx.topic, name: ctx.name});
+		ctx.$out.setAll({topic: ctx.topic, name: ctx.name,
+			is_topic: /^\/wiki\/t/.test(ctx.$req.url)});
 		cb();
 	}
 

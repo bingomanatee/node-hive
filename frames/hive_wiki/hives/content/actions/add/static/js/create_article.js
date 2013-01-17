@@ -1,11 +1,11 @@
-function Page_Editor($scope, $filter, $compile, Articles) {
+function Page_Editor($scope, $filter, $compile, Articles, is_topic) {
 
 	$scope.content = ' ' + Math.random();
 	$scope.name = '';
 	$scope.rendered = '';
 	$scope.tags = [];
 	$scope.new_tag = '';
-	$scope.is_topic = 0;
+	$scope.is_topic = is_topic;
 
 	$scope.add_tag = function () {
 		$scope.tags.push($scope.new_tag.toLowerCase());
@@ -17,6 +17,7 @@ function Page_Editor($scope, $filter, $compile, Articles) {
 		var article = {
 			title:    $scope.title,
 			name:     $scope.name,
+			intro:    $scope.intro,
 			tags:     $scope.tags,
 			content:  $scope.content,
 			topic:    $scope.topic,
@@ -25,7 +26,6 @@ function Page_Editor($scope, $filter, $compile, Articles) {
 
 		if ($scope.is_topic) {
 			article.topic = $scope.name;
-			article.name = '';
 		}
 
 		Articles.add(article, function () {
@@ -51,6 +51,10 @@ function Page_Editor($scope, $filter, $compile, Articles) {
 		Articles.exists({name: name, topic: topic}, function (err, ex_result) {
 			console.log(ex_result);
 		})
+	}
+
+	$scope.generate_name = function(){
+		$scope.name = $scope.title.toLowerCase().replace(/[^\w]+/g, '_').replace(/[_]+/g, '_');
 	}
 
 	$scope.$watch('name', _start_update_exists);
@@ -142,5 +146,5 @@ function Page_Editor($scope, $filter, $compile, Articles) {
 
 var page_creator_app = angular.module('page_creator', ['articleServices']);
 
-page_creator_app.controller('page_editor', Page_Editor, ['$scope', '$filter', '$compile', 'Articles']);
+page_creator_app.controller('page_editor', Page_Editor, ['$scope', '$filter', '$compile', 'Articles', 'is_topic']);
 

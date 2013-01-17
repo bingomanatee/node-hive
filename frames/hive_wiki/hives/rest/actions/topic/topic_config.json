@@ -1,0 +1,9 @@
+{
+
+	"routes": {
+		"get":  "/wiki/rest/topic/:topic",
+		"put":  "/wiki/rest/topic/:topic",
+		"post": "/wiki/rest/topic/:topic"
+	}
+
+}
