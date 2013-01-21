@@ -20,7 +20,7 @@
 		"/css/hive_wiki/add/create_article.css"
 	],
 
-	"layout_name": "hive_wiki",
+	"layout_name": "node_hive",
 
 	"static": {
 		"js":  "/js/hive_wiki/add",

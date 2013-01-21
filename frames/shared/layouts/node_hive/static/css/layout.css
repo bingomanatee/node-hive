@@ -1,0 +1,25 @@
+body {
+    padding-top: 50px;
+    padding-bottom: 40px;
+}
+.sidebar-nav {
+    padding: 9px 0;
+}
+
+.navbar .brand {
+    padding-top: 3px; padding-bottom: 2px;
+}
+
+.navbar.navbar-inverse.navbar-fixed-top * ,
+.navbar.navbar-inverse.navbar-fixed-top .navbar-inner a {
+    background-color: rgb(77, 51, 175);
+    color: rgb(51, 255, 255);
+}
+
+.navbar.navbar-inverse.navbar-fixed-top .navbar-inner .brand {
+    color: yellow
+}
+
+h1 {
+    font-family: gravitas-one, "Arial Black", Impact, sans-serif;
+}

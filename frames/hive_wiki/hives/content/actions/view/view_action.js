@@ -17,7 +17,7 @@ module.exports = {
 
 	on_validate: function(ctx, cb){
 		if (!ctx.topic && ctx.name){
-			 ctx.$flash('error', 'Cannot find topic and/or name');
+			this.flash_message(ctx, 'error', 'Cannot find topic and/or name');
 			ctx.$go('/wiki/articles', cb);
 		} else {
 			cb();

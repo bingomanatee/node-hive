@@ -1,7 +1,24 @@
 <h1>Topic &quot;<%= article.title %>&quot;</h1>
-
 <article><%- html %></article>
+<div ng-app="topic">
 
+    <div ng-controller="artice-list">
+        <div class="tabset">
+            <div class="tab-row">
+                <div class="tab">By Tag</div>
+                <div class="tab">Alphabetically</div>
+            </div>
+            <div class="tab-content">
+                <div ng-repeat="article in articles">
+                    <h3>{{ article.title }}</h3>
+
+                    <p>{{ article.info }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 <div class="navbar navbar-inverse">
     <div class="navbar-inner">

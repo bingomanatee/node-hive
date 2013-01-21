@@ -1,0 +1,20 @@
+{
+	"name": "node_hive",
+
+	"static": {
+		"css": "/node_hive/css",
+		"js":  "/node_hive/js",
+		"img": "/node_hive/img"
+
+	},
+
+	"javascript_head": [
+		"http://use.edgefonts.net/gravitas-one.js"
+	],
+
+	"css": [
+		"/node_hive/css/bootstrap.css",
+		"/node_hive/css/bootstrap-responsive.css",
+		"/node_hive/css/layout.css"
+	]
+}

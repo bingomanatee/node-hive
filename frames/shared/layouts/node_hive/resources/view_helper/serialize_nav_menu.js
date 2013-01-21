@@ -18,7 +18,7 @@ module.exports = function (apiary, cb) {
 		name: 'nav_menu_view_helper',
 
 		test: function (ctx, output) {
-			return output.layout_name == 'hive_wiki';
+			return output.layout_name == 'node_hive';
 		},
 
 		weight: 1000,

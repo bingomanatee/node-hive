@@ -19,7 +19,7 @@ module.exports = function (apiary, cb) {
 		name: 'hive_wiki_nav_menu_helper',
 
 		test: function (context, output) {
-			return _.contains(['hive_queen', 'hive_wiki'], output.layout_name);
+			return _.contains(['hive_queen', 'node_hive'], output.layout_name);
 		},
 
 		weight: -800,

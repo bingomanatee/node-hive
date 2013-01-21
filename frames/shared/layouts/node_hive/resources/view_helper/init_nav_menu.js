@@ -19,7 +19,7 @@ module.exports = function (apiary, cb) {
 
 		test: function (ctx, output) {
 			if (_DEBUG) console.log('inmvh: testing layout name %s', output.layout_name);
-			return output.layout_name == 'hive_wiki';
+			return output.layout_name == 'node_hive';
 		},
 
 		weight: -900,

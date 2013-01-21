@@ -8,17 +8,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="/hive_wiki/css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-        body {
-            padding-top: 60px;
-            padding-bottom: 40px;
-        }
-        .sidebar-nav {
-            padding: 9px 0;
-        }
-    </style>
-    <link href="/hive_wiki/css/bootstrap-responsive.css" rel="stylesheet">
+
     <% css.forEach(function(css){%>
     <link href="<%= css %>" rel="stylesheet" />
     <% }) %>
@@ -32,11 +22,11 @@
     <script src="<%= js %>"></script><% }) %>
 
     <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/hive_wiki/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/hive_wiki/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/hive_wiki/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="/hive_wiki/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="/hive_wiki/img/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/node_hive/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/node_hive/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/node_hive/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/node_hive/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="/node_hive/img/favicon.png">
 </head>
 
 <body>
@@ -49,7 +39,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">Project name</a>
+
+            <a class="brand" href="#"><img width="52" height="39" src="/node_hive/img/logo.png" /> node-hive</a>
             <div class="nav-collapse collapse">
                 <p class="navbar-text pull-right">
                     Logged in as <a href="#" class="navbar-link">Username</a>
@@ -66,7 +57,7 @@
 
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span3">
+        <div class="span3 leftnav-frame">
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
                     <% var menu = $menus.left_nav %>
@@ -74,7 +65,7 @@
                 </ul>
             </div><!--/.well -->
         </div><!--/span-->
-        <div class="span9">
+        <div class="span9 content-frame">
             <%- 'mesages' // messages() %>
             <%- body %>
         </div><!--/span-->
@@ -90,8 +81,8 @@
 
 <!-- Le javascript
 ================================================== -->
-<script src="/hive_wiki/js/vendor/jquery-1.8.3.min.js"></script>
-<script src="/hive_wiki/js/vendor/bootstrap.js"></script>
+<script src="/node_hive/js/vendor/jquery-1.8.3.min.js"></script>
+<script src="/node_hive/js/vendor/bootstrap.js"></script>
 
 </body>
 </html>

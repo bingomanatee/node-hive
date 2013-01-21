@@ -21,6 +21,7 @@
 		"less-middleware":     "*",
 		"marked":              "*",
 		"mongoose":            "*",
-		"underscore":          "1.4.3"
+		"underscore":          "1.4.3",
+		"tap":                 ">=0.3.3"
 	}
 }

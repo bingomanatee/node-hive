@@ -3,5 +3,5 @@
 		"get": "/wiki/t/:topic"
 	},
 
-	"layout_name": "hive_wiki"
+	"layout_name": "node_hive"
 }
