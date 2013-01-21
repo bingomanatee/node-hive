@@ -1,0 +1,9 @@
+<% _.each(messages, function(content, type){
+
+%>
+<div class="alert alert-<%= type %>">
+    <button type="button" class="close" data-dismiss="alert-<%= type %>">&times;</button>
+    <h4><%= type %></h4>
+   <p><%- content.join('</p><p>') %></p>
+</div>
+<% }) %>
