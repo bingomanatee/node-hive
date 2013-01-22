@@ -14,7 +14,7 @@ function _trim_article(article) {
 	if (article.toJSON) {
 		article = article.toJSON();
 	}
-	delete article.archive;
+	delete article._archives;
 	return article;
 }
 
@@ -36,7 +36,7 @@ module.exports = {
 			cb();
 		}
 
-		article_model.get_topic(ctx.topic, _on_article)
+		article_model.get_topic(ctx.topic, _on_article, true);
 	},
 
 	on_put_process: function (ctx, cb) {

@@ -1,23 +1,41 @@
-<h1>Topic &quot;<%= article.title %>&quot;</h1>
-<article><%- html %></article>
 <div ng-app="topic">
 
-    <div ng-controller="artice-list">
-        <div class="tabset">
-            <div class="tab-row">
-                <div class="tab">By Tag</div>
-                <div class="tab">Alphabetically</div>
-            </div>
-            <div class="tab-content">
-                <div ng-repeat="article in articles">
-                    <h3>{{ article.title }}</h3>
+    <div ng-controller="page_list"  >
+        <div id="intro" class="hero-unit">
+            <h1>Topic &quot;<%= article.title %>&quot;</h1>
+            <article><%- html %></article>
+        </div>
 
-                    <p>{{ article.info }}</p>
+
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand" href="#">Articles</a>
+                    <ul class="nav">
+                        <li><p>Search:
+                            <input type="text" class="search-query" style="margin: 0px"
+                                   ng-model="search"/></p></li>
+                        <li ng-show="tag_filter"> <a href="#" ng-click="tag_filter = ''">
+                            Showing articles with tag &quot;{{
+                            tag_filter }}&quot; <span style="color:red">&times;</span>
+                        </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </div>
 
+            <div class="row" ng-repeat="article in topic_data.articles | filter:article_filter | filter:search">
+                <div class="span1">&nbsp;</div>
+                <div class="span4"><a href="/wiki/a/{{topic_data.topic }}/{{article.name}}">{{ article.title }}
+                    ({{article.name
+                    }})</a></div>
+
+                <div class="span7"><p>{{ article.intro }}
+                    <button ng-repeat="tag in article.tags" class="btn btn-mini" ng-click="filter_tags(tag)">
+                        {{tag}}
+                    </button></p>
+                </div>
+            </div>
+    </div>
 </div>
 
 <div class="navbar navbar-inverse">
@@ -39,3 +57,7 @@
         </ul>
     </div>
 </div>
+
+<script language="javascript">
+    topic_app.value('topic', '<%= article.topic %>');
+</script>

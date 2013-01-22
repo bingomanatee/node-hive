@@ -14,7 +14,7 @@ function _trim_article(article) {
 	if (article.toJSON) {
 		article = article.toJSON();
 	}
-	delete article.archive;
+	delete article._archives;
 	return article;
 }
 

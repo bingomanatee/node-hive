@@ -3,5 +3,19 @@
 		"get": "/wiki/t/:topic"
 	},
 
-	"layout_name": "node_hive"
+	"javascript_head": [
+		"/js/hive_wiki/vendor/marked.js",
+		"/js/hive_wiki/vendor/underscore-min.js",
+		"/js/hive_wiki/vendor/angular.min.js",
+		"/js/hive_wiki/vendor/angular-resource.js",
+		"/js/hive_wiki/model/article.js",
+		"/js/hive_wiki/topic/page_list.js"
+	],
+
+	"layout_name": "node_hive",
+
+	"static": {
+		"js":  "/js/hive_wiki/topic",
+		"css": "/css/hive_wiki/topic"
+	}
 }

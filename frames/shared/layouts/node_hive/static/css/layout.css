@@ -1,25 +1,108 @@
+
+@font-face { font-family: Chunkfive; src: url('ChunkFive/ChunkFive.otf'); }
+
 body {
     padding-top: 50px;
     padding-bottom: 40px;
-}
-.sidebar-nav {
-    padding: 9px 0;
+    font-family: 'Open Sans', "Helvetica Neue", "Helvetica", sans-serif;
+    font-size: 1em;
 }
 
-.navbar .brand {
+.nav-header {
+    font-weight: 300;
+    font-size: 100%;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, sans-serif;
+
+}
+.well.sidebar-nav {
+    background-color: rgb(245, 255, 0);
+    font-weight: 600;
+    padding: 9px 0;
+    color: black;
+}
+.well.sidebar-nav li.nav-header:hover {
+    background-color: transparent;
+}
+
+.well.sidebar-nav li a:hover {
+    background-color:  rgba(77, 51, 175, 0.33);
+    color: black;
+}
+
+.well.sidebar-nav a {
+    color: rgb(77, 51, 175);
+    font-weight: normal;
+}
+
+.container-fluid {
+    padding: 0em 0.5em;
+}
+
+.navbar.navbar-fixed-top .brand {
     padding-top: 3px; padding-bottom: 2px;
 }
 
-.navbar.navbar-inverse.navbar-fixed-top * ,
+.navbar .nav li p {
+    padding: 7px 5px;
+    margin: 0px;
+}
+
+.hero-unit {
+    background-color:  rgba(77, 51, 175, 0.05);
+    padding: 2em;
+}
+
+.hero-unit p {
+    font-size: 150%;
+}
+
+.hero-unit h1 {
+    font-size: 350%;
+    color: rgb(77, 51, 175);
+    border-bottom: none;
+}
+
+.navbar.navbar-inverse.navbar-fixed-top * {
+    background-color: rgb(16, 0, 101);
+}
+
 .navbar.navbar-inverse.navbar-fixed-top .navbar-inner a {
-    background-color: rgb(77, 51, 175);
+    background-color: rgb(16, 0, 101);
     color: rgb(51, 255, 255);
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 125%;
 }
 
 .navbar.navbar-inverse.navbar-fixed-top .navbar-inner .brand {
+    font-family: 'Chunkfive', "Open Sans", "Helvetica Neue", Helvetica, sans-serif;
     color: yellow
 }
 
 h1 {
-    font-family: gravitas-one, "Arial Black", Impact, sans-serif;
+    font-family:'Chunkfive', 'Open Sans', "Arial Black", Impact, sans-serif;
+    font-weight: 800;
+    font-size: 300%;
+    margin-bottom: 0.25em;
+    padding-bottom: 0.33em;
+    color: rgba(77,51, 175, 1);
+    border-bottom: 2px dotted rgba(77,51, 175, 0.5)
+}
+h2 {
+    font-family:  'Open Sans', "Helvetica Neue", "Helvetica", sans-serif;
+    font-weight: 600;
+    font-size: 200%;
+}
+h3 {
+    font-family: 'Open Sans', "Helvetica Neue", "Helvetica", sans-serif;
+    font-weight: 500;
+    font-size: 200%;
+    color: rgb(102,102, 102);
+}
+h4{
+    font-family: 'Open Sans', "Helvetica Neue", "Helvetica", sans-serif;
+    font-weight: 600;
+    font-size: 100%;
+    color: rgb(102,102, 102);
 }
