@@ -1,11 +1,14 @@
-
-@font-face { font-family: Chunkfive; src: url('ChunkFive/ChunkFive.otf'); }
+@font-face {
+    font-family: Chunkfive;
+    src: url('ChunkFive/ChunkFive.otf');
+}
 
 body {
     padding-top: 50px;
     padding-bottom: 40px;
     font-family: 'Open Sans', "Helvetica Neue", "Helvetica", sans-serif;
     font-size: 1em;
+    color: black;
 }
 
 .nav-header {
@@ -15,18 +18,24 @@ body {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, sans-serif;
 
 }
+
 .well.sidebar-nav {
-    background-color: rgb(245, 255, 0);
+    background-color: rgb(236, 255, 129);
     font-weight: 600;
     padding: 9px 0;
     color: black;
 }
+
+.help-block, .help-inline {
+    font-size: 80%;
+}
+
 .well.sidebar-nav li.nav-header:hover {
     background-color: transparent;
 }
 
 .well.sidebar-nav li a:hover {
-    background-color:  rgba(77, 51, 175, 0.33);
+    background-color: rgba(77, 51, 175, 0.33);
     color: black;
 }
 
@@ -40,7 +49,11 @@ body {
 }
 
 .navbar.navbar-fixed-top .brand {
-    padding-top: 3px; padding-bottom: 2px;
+    padding: 8px;
+}
+
+.navbar .nav li p.error {
+    color: rgb(255, 102, 153)
 }
 
 .navbar .nav li p {
@@ -48,8 +61,14 @@ body {
     margin: 0px;
 }
 
+.breadcrumb {
+    background-color: transparent;
+    font-size: 75%;
+    margin-bottom: 0.25em;
+}
+
 .hero-unit {
-    background-color:  rgba(77, 51, 175, 0.05);
+    background-color: rgba(77, 51, 175, 0.05);
     padding: 2em;
 }
 
@@ -63,46 +82,108 @@ body {
     border-bottom: none;
 }
 
-.navbar.navbar-inverse.navbar-fixed-top * {
-    background-color: rgb(16, 0, 101);
+@media (max-width: 979px) {
+    .hero-unit {
+        padding: 1em;
+    }
+
+    .hero-unit p {
+        font-size: 100%;
+    }
+
+    .hero-unit h1 {
+        font-size: 150%;
+    }
+}
+
+.navbar-inverse .btn-navbar,
+.navbar-inverse .navbar-inner,
+.navbar-inverse .nav-collapse .nav > li > a:hover,
+.navbar-inverse .nav-collapse .dropdown-menu a:hover {
+    background-color: rgb(16, 0, 117) !important;
+    background-image: none;
+    color: white;
+}
+
+.navbar-inverse .btn-navbar .active,
+.navbar-inverse .navbar-inner .active,
+.navbar-inverse .btn-navbar .active a,
+.navbar-inverse .navbar-inner .active a {
+    background-color: rgb(77, 51, 175);
+    background-image: none;
+}
+
+.inline {
+    display: inline !important;
+}
+
+.navbar.navbar-inverse.navbar-fixed-top .navbar-inner {
+    min-height: 2.25em;
 }
 
 .navbar.navbar-inverse.navbar-fixed-top .navbar-inner a {
-    background-color: rgb(16, 0, 101);
-    color: rgb(51, 255, 255);
+    color: #c2f103;
     text-transform: uppercase;
     font-weight: normal;
-    font-size: 125%;
+}
+.navbar.navbar-inverse.navbar-fixed-top {
+    padding: 0px;
+    margin: 0px;
+}
+
+.navbar.navbar-inverse.navbar-fixed-top {
+    line-height: 100%;
+    padding:  0px;
+}
+.navbar.navbar-inverse.navbar-fixed-top  .navbar-text {
+    line-height: 200%;
+}
+
+.navbar.navbar-fixed-top .nav > li > a {
+    float: none;
+    padding: 5px 7px 5px;
 }
 
 .navbar.navbar-inverse.navbar-fixed-top .navbar-inner .brand {
     font-family: 'Chunkfive', "Open Sans", "Helvetica Neue", Helvetica, sans-serif;
-    color: yellow
+    color: #c2f103
+}
+
+a {
+    color: rgb(204, 0, 0);
+}
+
+a:hover {
+    color: red;
+
 }
 
 h1 {
-    font-family:'Chunkfive', 'Open Sans', "Arial Black", Impact, sans-serif;
+    font-family: 'Chunkfive', 'Open Sans', "Arial Black", Impact, sans-serif;
     font-weight: 800;
     font-size: 300%;
     margin-bottom: 0.25em;
     padding-bottom: 0.33em;
-    color: rgba(77,51, 175, 1);
-    border-bottom: 2px dotted rgba(77,51, 175, 0.5)
+    color: rgba(77, 51, 175, 1);
+    border-bottom: 2px dotted rgba(77, 51, 175, 0.5)
 }
+
 h2 {
-    font-family:  'Open Sans', "Helvetica Neue", "Helvetica", sans-serif;
+    font-family: 'Open Sans', "Helvetica Neue", "Helvetica", sans-serif;
     font-weight: 600;
     font-size: 200%;
 }
+
 h3 {
     font-family: 'Open Sans', "Helvetica Neue", "Helvetica", sans-serif;
     font-weight: 500;
     font-size: 200%;
-    color: rgb(102,102, 102);
+    color: rgb(102, 102, 102);
 }
-h4{
+
+h4 {
     font-family: 'Open Sans', "Helvetica Neue", "Helvetica", sans-serif;
     font-weight: 600;
     font-size: 100%;
-    color: rgb(102,102, 102);
+    color: rgb(102, 102, 102);
 }

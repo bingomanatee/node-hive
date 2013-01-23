@@ -40,15 +40,18 @@
                 <span class="icon-bar"></span>
             </a>
 
-            <a class="brand" href="#"><img width="52" height="39" src="/node_hive/img/logo.png" /> node-hive</a>
+            <a class="brand" href="#"><img width="26" height="20" src="/node_hive/img/logo.png" /> node-hive</a>
             <div class="nav-collapse collapse">
                 <p class="navbar-text pull-right">
-                    Logged in as <a href="#" class="navbar-link">Username</a>
+                    <%- $helpers.member_state() %>
                 </p>
                 <ul class="nav">
                     <li class="active"><a href="#">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li class="hidden-desktop">
+                        <%- $helpers.member_state() %>
+                    </li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
