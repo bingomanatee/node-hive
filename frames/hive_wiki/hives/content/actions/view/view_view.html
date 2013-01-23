@@ -1,3 +1,10 @@
+<ul class="breadcrumb">
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li>Wiki<span class="divider">/</span></li>
+    <li><a href="/wiki/t/<%= article.topic %>"><%= article.topic %></a></li>
+    <li class="active"><%= article.title %>(<%= article.name %>)</li>
+</ul>
+
 <h1>Article &quot;<%= article.title %>&quot;</h1>
 
 <article><%- html %></article>

@@ -6,6 +6,7 @@
 					"gate": "*",
 					"hive-loader": ">=0.0.1",
 					"underscore": "*",
-					"marked": "*"
+					"marked": "*",
+					"hive-model-mongoose": ">=0.0.1"
 	}
 }
