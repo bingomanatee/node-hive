@@ -1,0 +1,20 @@
+{
+	"layout_name": "node_hive",
+	"routes":      {
+		"get": "/member/join"
+	},
+
+	"javascript_head": [
+		"/js/member/vendor/marked.js",
+		"/js/member/vendor/underscore-min.js",
+		"/js/member/vendor/angular.min.js",
+		"/js/member/vendor/angular-resource.js",
+		"/js/member/model/member.js",
+		"/js/member/join/join.js"
+	],
+
+	"static": {
+		"js":  "/js/member/join",
+		"css": "/css/member/join"
+	}
+}

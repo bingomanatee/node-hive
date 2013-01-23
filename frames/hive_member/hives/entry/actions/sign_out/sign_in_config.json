@@ -1,0 +1,5 @@
+{
+	"routes": {
+		"get": "/member/sign_out"
+	}
+}

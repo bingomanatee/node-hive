@@ -1,0 +1,6 @@
+{
+	"name":   "member_rest",
+	"routes": {
+		"put": "/member/rest/member/:_id?"
+	}
+}

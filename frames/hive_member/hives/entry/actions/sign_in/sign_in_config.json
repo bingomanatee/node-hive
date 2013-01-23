@@ -1,0 +1,22 @@
+{
+	"layout_name": "node_hive",
+	"routes":      {
+		"get":  "/member/sign_in/:member_name?",
+		"post": "/member/sign_in"
+
+	},
+
+	"javascript_head": [
+		"/js/member/vendor/marked.js",
+		"/js/member/vendor/underscore-min.js",
+		"/js/member/vendor/angular.min.js",
+		"/js/member/vendor/angular-resource.js",
+		"/js/member/model/member.js",
+		"/js/member/sign_in/sign_in.js"
+	],
+
+	"static": {
+		"js":  "/js/member/sign_in",
+		"css": "/css/member/sign_in"
+	}
+}

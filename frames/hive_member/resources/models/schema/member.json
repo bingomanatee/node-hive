@@ -1,0 +1,20 @@
+{
+	"_id": {
+		"type":     "string",
+		"unique":   true,
+		"comments": "the member name"
+	},
+
+	"real_name": "string",
+
+	"password": {
+		"value":      "string",
+		"encryption": "string",
+		"salt":       "string"
+	},
+
+	"deleted": {
+		"type":    "boolean",
+		"default": false
+	}
+}

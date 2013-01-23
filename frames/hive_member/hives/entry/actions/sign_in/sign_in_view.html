@@ -1,0 +1,89 @@
+<ul class="breadcrumb">
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li>Member<span class="divider">/</span></li>
+    <li class="active">Sign In</li>
+</ul>
+<div ng-app="member">
+    <div ng-controller="join">
+
+        <h1>Sign In!</h1>
+
+        <p>Log in to our site.
+            If you have never set your user ID for this site <a href="/member/join">Join as a member</a>. </p>
+
+        <form name="sign_in_form" class="form-horizontal" ng-submit="save()">
+
+            <div class="control-group">
+                <label class="control-label" for="member_name">Member Name</label>
+
+                <div class="controls">
+                    <input type="text" id="member_name" autocomplete="off"
+                           name="member_name"
+                           class="input-large"
+                           ng-required="true"
+                           ng-minlength="3"
+                           ng-model="member_name"/>
+                    <span class="help-inline " ng-show="sign_in_form.member_name.$error.required">Required</span>
+                    <span class="help-inline "
+                          ng-show="sign_in_form.member_name.$error.minlength">Must be at least 3 characters</span>
+                    <span class="help-inline"
+                          ng-show="member_exists_error()">{{ member_exists_error() }}</span>
+                    <br/>
+                    <span class="help-block">Your user name - used to log in.</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="password">Password</label>
+
+                <div class="controls">
+                    <input type="password" id="password" autocomplete="off"
+                           name="password"
+                           class="input-large"
+                           ng-required="true"
+                           ng-minlength="6"
+                           ng-model="password"/>
+                    <span class="help-inline "
+                          ng-show="sign_in_form.password.$error.required">Required</span>
+                    <span class="help-inline "
+                          ng-show="sign_in_form.password.$error.minlength">Must be at least 6 characters</span>
+                    <br/>
+                </div>
+            </div>
+            
+            <div class="navbar navbar-inverse">
+                <div class="navbar-inner">
+                    <ul class="nav">
+                        <li>
+                            <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                        </li>
+                        <li class="divider-vertical"></li>
+                        <li>
+                            <button  class="btn" ng-click="join()"><i class="icon-plus "></i>&nbsp;
+                                Join Our Membership
+                            </button>
+                        </li>
+                        <li class="divider-vertical"></li>
+                        <li>
+                            <button ng-disabled="error_message()" class="btn btn-success"
+                                    ng-click="sign_in()"><i class="icon-pencil "></i>&nbsp;
+                                Sign In
+                            </button>
+                        </li>
+                        <li>
+                            <p class="error">{{ error_message() }}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<style>
+    form[name=sign_in_form] .navbar-inner button[disabled=disabled] {
+        opacity: 0.5
+    }
+</style>

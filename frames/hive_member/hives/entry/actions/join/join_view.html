@@ -1,0 +1,116 @@
+<ul class="breadcrumb">
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li>Member<span class="divider">/</span></li>
+    <li class="active">Join</li>
+</ul>
+<div ng-app="member">
+    <div ng-controller="join">
+
+        <h1>Join Us!</h1>
+
+        <p>Join our membership. </p>
+
+        <form name="join_form" class="form-horizontal">
+
+            <div class="control-group">
+                <label class="control-label" for="member_name">Member Name</label>
+
+                <div class="controls">
+                    <input type="text" id="member_name" autocomplete="off"
+                           name="member_name"
+                           class="input-large"
+                           ng-required="true"
+                           ng-minlength="3"
+                           ng-model="member_name"/>
+                    <span class="help-inline " ng-show="join_form.member_name.$error.required">Required</span>
+                    <span class="help-inline "
+                          ng-show="join_form.member_name.$error.minlength">Must be at least 3 characters</span>
+                    <span class="help-inline"
+                          ng-show="member_exists_error()">{{ member_exists_error() }}</span>
+                    <br/>
+                    <span class="help-block">Your user name - used to log in.</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="password">Password</label>
+
+                <div class="controls">
+                    <input type="password" id="password" autocomplete="off"
+                           name="password"
+                           class="input-large"
+                           ng-required="true"
+                           ng-minlength="6"
+                           ng-model="password"/>
+                    <span class="help-inline "
+                          ng-show="join_form.password.$error.required">Required</span>
+                    <span class="help-inline "
+                          ng-show="join_form.password.$error.minlength">Must be at least 6 characters</span>
+                    <br/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="password2">Password (repeat)</label>
+
+                <div class="controls">
+                    <input type="password" id="password2" autocomplete="off"
+                           name="password2"
+                           class="input-large"
+                           ng-required="true"
+                           ng-minlength="6"
+                           ng-model="password2"/>
+                    <span class="help-inline "
+                          ng-show="join_form.password2.$error.required">Required</span>
+                    <span class="help-inline "
+                          ng-show="join_form.password2.$error.minlength">Must be at least 6 characters</span>
+                    <br/>
+                    <span class="help-block" ng-show="password && password2 && (password != password2)">
+                        Your two password fields must match
+                    </span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="email">Email</label>
+
+                <div class="controls">
+                    <input type="text" id="email" autocomplete="off"
+                           name="email"
+                           class="input-large"
+                           ng-required="false"
+                           ng-model="email"/><br />
+                    <span class="help-block">Optional; used for lost password recovery</span>
+                </div>
+            </div>
+            
+            <div class="navbar navbar-inverse">
+                <div class="navbar-inner">
+                    <ul class="nav">
+                        <li>
+                            <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                        </li>
+                        <li class="divider-vertical"></li>
+                        <li>
+                            <button ng-disabled="error_message()" class="btn btn-success" ng-click="join()"><i
+                                    class="icon-plus "></i>&nbsp;
+                                Join Our Membership
+                            </button>
+                        </li>
+                        <li>
+                            <p class="error">{{ error_message() }}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<style>
+    form[name=join_form] .navbar-inner button[disabled=disabled] {
+        opacity: 0.5
+    }
+</style>
