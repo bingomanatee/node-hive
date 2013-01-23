@@ -25,7 +25,7 @@ module.exports = function (apiary, cb) {
 
 		respond: function (ctx, output, cb) {
 
-			console.log('$menus: %s', util.inspect(output.$menus, true, 4));
+			// console.log('$menus: %s', util.inspect(output.$menus, true, 4));
 			output.$menus.left_nav = output.$menus.left_nav.toJSON();
 			output.$menus.top_nav = output.$menus.top_nav.toJSON();
 			cb();
