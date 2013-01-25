@@ -1,0 +1,21 @@
+{
+	"routes": {
+			  "get": "/admin/members/list"
+	},
+
+	"layout_name": "node_hive",
+
+	"javascript_head": [
+		"/js/member/vendor/marked.js",
+		"/js/member/vendor/underscore-min.js",
+		"/js/member/vendor/angular-1.0.4/angular.js",
+		"/js/member/vendor/angular-1.0.4/angular-resource.js",
+		"/js/member/vendor/bootstrap-gh-pages/ui-bootstrap-tpls-0.1.0-SNAPSHOT.js",
+		"/js/member/model/member.js",
+		"/js/member/list/list.js"
+	],
+
+	"static": {
+		"js":  "/js/member/list"
+	}
+}

@@ -77,15 +77,14 @@
     <hr>
 
     <footer>
-        <p>&copy; Company 2012</p>
+        <p>&copy; Wonderland Labs <%= new Date().getFullYear() %></p>
     </footer>
 
-</div><!--/.fluid-container-->
+</div><!-- end container-fluid-->
 
 <!-- Le javascript
 ================================================== -->
-<script src="/node_hive/js/vendor/jquery-1.8.3.min.js"></script>
-<script src="/node_hive/js/vendor/bootstrap.js"></script>
-
+<% javascript.forEach(function(js){
+%><script src="<%= js %>"></script><% }) %>
 </body>
 </html>

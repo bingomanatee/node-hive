@@ -4,8 +4,9 @@
 	"private":      true,
 	"dependencies": {
 		"gate":                "*",
-		"hive-loader":         "*",
+		"hive-loader":         ">=0.0.1",
 		"underscore":          "*",
-		"hive-model-mongoose": ">=0.0.1"
+		"hive-model-mongoose": ">=0.0.1",
+		"tap":                 "*"
 	}
 }

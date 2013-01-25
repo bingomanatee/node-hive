@@ -8,10 +8,12 @@
 	"real_name": "string",
 
 	"password": {
-		"value":      "string",
-		"encryption": "string",
-		"salt":       "string"
+		"value":    "string",
+		"method":   "string",
+		"envelope": "string"
 	},
+
+	"email": "string",
 
 	"deleted": {
 		"type":    "boolean",

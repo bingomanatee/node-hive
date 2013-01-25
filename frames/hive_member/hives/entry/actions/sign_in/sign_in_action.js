@@ -28,23 +28,10 @@ module.exports = {
 	on_post_input: function (context, callback) {
 		var model = this.model('member');
 
-		model.get(context.member_name, function (err, member) {
+		model.member_has_password(context.member_name, context.password, function (err, has_password, member) {
 
-			if (!member || member.deleted){
-				console.log('bad member');
-				context.$send(new Error(UNHELPFUL_ERR_MSG));
-				return callback('redirect');
-			}
+			if (has_password){
 
-			console.log('retrieved member: %s', util.inspect(member.toJSON()));
-
-			if (model.member_has_password(member, context.password)){
-				context.member = member;
-				callback();
-			} else {
-				console.log('bad password %s', util.inspect(context.password));
-				context.$send(new Error(UNHELPFUL_ERR_MSG));
-				return callback('redirect');
 			}
 		});
 	},

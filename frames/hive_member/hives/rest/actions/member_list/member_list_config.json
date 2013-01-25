@@ -1,0 +1,6 @@
+{
+	"name":   "member_list_rest",
+	"routes": {
+		"get": "/member/rest/member"
+	}
+}

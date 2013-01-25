@@ -33,7 +33,7 @@ module.exports = function (apiary, cb) {
 				items:  [
 					{
 						title: 'Members',
-						link: '/wiki/members/list',
+						link: '/admin/members/list',
 						weight: 0
 					}
 				]

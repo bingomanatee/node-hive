@@ -1,0 +1,107 @@
+<h1>Members</h1>
+
+<div ng-app="member">
+    <div ng-controller="list">
+        <table class="table">
+            <tr>
+                <th>Name (_id)</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>&nbsp;</th>
+            </tr>
+
+            <tr ng-repeat="member in members">
+                <td>{{member._id }}</td>
+                <td>{{member.email}}</td>
+                <td>{{member.password.value }}</td>
+                <td>
+                    <button class="btn" ng-click="edit(member)">Edit</button>
+                </td>
+            </tr>
+        </table>
+
+        <div modal="open_edit_form" close="close()">
+            <div class="modal-header">
+                <h4>Edit Member</h4>
+            </div>
+            <div class="modal-body">
+
+            <form name="edit_member_form" class="form-horizontal" ng-submit="update_member()">
+
+                <div class="control-group">
+                    <label class="control-label" for="member_name">Member Name</label>
+
+                    <div class="controls">
+                        <input type="text" id="member_name" autocomplete="off"
+                               name="_id"
+                               disabled
+                               class="input-large"
+                               ng-model="edited_member._id"/>
+                        <span class="help-inline">You cannot edit a members' name.</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="email">Email</label>
+
+                    <div class="controls">
+                        <input type="text" id="email" autocomplete="off"
+                               name="email"
+                               class="input-large"
+                               ng-model="edited_member.email"/>
+                    <span class="help-block">You can set, but never read, a members email adddress. Not
+                        setting this field leaves the members' email address unchanged.</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="password">Password</label>
+
+                    <div class="controls">
+                        <input type="password" id="password" autocomplete="off"
+                               name="password"
+                               class="input-large"
+                               ng-required="true"
+                               ng-minlength="6"
+                               ng-model="edited_member.password.value"/>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="password2">Password (repeat)</label>
+
+                    <div class="controls">
+                        <input type="password" id="password2" autocomplete="off"
+                               name="password2"
+                               class="input-large"
+                               ng-minlength="6"
+                               ng-model="password2"/>
+                    <span class="help-inline "
+                          ng-show="edit_member_form.password2.$error.minlength">Must at
+                        least 6 characters</span>
+                        <br/>
+                    <span class="help-block"
+                          ng-show="(edited_member.password.value != password2)">
+                        Your two password fields must match
+                    </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+
+            <button class="btn btn-danger" ng-click="delete()"><i
+                    class="icon-trash"></i> Delete Member
+            </button>
+
+            <button class="btn" ng-click="cancel_edit()">Cancel</button>
+
+            <button class="btn btn-success" ng-click="update_member()"><i
+                    class="icon-pencil "></i>&nbsp;
+                Update Member
+            </button>
+
+        </div>
+        </div>
+    </div>
+</div>

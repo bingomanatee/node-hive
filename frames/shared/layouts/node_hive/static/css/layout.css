@@ -50,6 +50,7 @@ body {
 
 .navbar.navbar-fixed-top .brand {
     padding: 8px;
+    margin-left: 0px;
 }
 
 .navbar .nav li p.error {
