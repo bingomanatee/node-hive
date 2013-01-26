@@ -1,0 +1,8 @@
+{
+	"name":   "hive_world_rest",
+	"routes": {
+		"get":  ["/hive_world/rest/world", "/hive_world/rest/world/:_id"],
+		"put":  "/hive_world/rest/world",
+		"post": "/hive_world/rest/world/:_id"
+	}
+}

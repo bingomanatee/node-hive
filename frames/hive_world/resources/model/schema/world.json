@@ -1,4 +1,14 @@
 {
-	"name": "string",
-	"author" : "string",
+	"name":         "string",
+	"author":       "string",
+	"radius":       "number",
+	"size_units":   {
+		"type":    "string",
+		"default": "km"
+	},
+	"height_units": {
+		"type":    "string",
+		"default": "m"
+	},
+	"sea_level":    "number"
 }

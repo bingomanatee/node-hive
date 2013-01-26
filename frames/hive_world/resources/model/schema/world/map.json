@@ -1,0 +1,31 @@
+{
+	"name":      "string",
+	"world": "objectid",
+	"coverage": [
+		{
+			"slice":  {
+				"type":    "number",
+				"default": 0
+			},
+			"top":    "number",
+			"left":   "number",
+			"right":  "number",
+			"bottom": "number",
+
+			"top_lat":    "number",
+			"bottom_lat": "number",
+
+			"left_lon":  "number",
+			"right_lon": "number"
+		}
+	],
+
+	"width":  "number",
+	"height": "number",
+
+	"top_lat":    "number",
+	"bottom_lat": "number",
+
+	"left_lon":  "number",
+	"right_lon": "number"
+}

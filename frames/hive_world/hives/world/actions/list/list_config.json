@@ -1,6 +1,20 @@
 {
 	"routes": {
 			  "get": "/worlds"
+	},
+
+	"layout_name": "node_hive",
+
+	"javascript_head": [
+		"/js/world/vendor/underscore-min.js",
+		"/js/world/vendor/angular.min.js",
+		"/js/world/vendor/angular-resource.js",
+		"/js/world/model/world.js",
+		"/js/world/list/list.js"
+	],
+
+	"static": {
+		"js":  "/js/world/list"
 	}
 
 }

@@ -49,9 +49,5 @@ Most maps will have the following layers:
 
 You can have as many layers as you want with whatever depths you want. 
 
-#### Packed Layers 
-
-Packed layers have arbitrary bit chunks of data. Its up to you to decide how to pack and define those layers. 
-
 ----------------------
 (* note - assuming perfectly spherical planetoids, because life is short. )

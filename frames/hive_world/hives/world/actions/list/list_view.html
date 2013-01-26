@@ -1,0 +1,113 @@
+<ul class="breadcrumb">
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li>Worlds<span class="divider">/</span></li>
+    <li class="active">List</li>
+</ul>
+
+<div ng-app="world">
+    <div ng-controller="list">
+        <h1>Worlds</h1>
+        <p>Add A World: <button class="btn btn-success" ng-click="create()"><i class="icon-pencil"></i> Create</button>
+        </p>
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Radius</th>
+                <th>&nbsp;</th>
+            </tr>
+
+            <tr ng-repeat="world in worlds">
+                <td>{{world._id }}</td>
+                <td>{{world.name}}</td>
+                <td>{{world.radius }}</td>
+                <td>
+                    <button class="btn" ng-click="edit(world)">Edit</button>
+                </td>
+            </tr>
+        </table><!-- end world list -->
+
+        <div modal="open_world_new" close="close_world_new()">
+            <div class="modal-header">
+                <h4>Create World</h4>
+            </div>
+            <div class="modal-body">
+
+                <form name="new_world_form" class="form-horizontal" ng-submit="update_member()">
+
+                    <div class="control-group">
+                        <label class="control-label" for="new_name">World Name</label>
+
+                        <div class="controls">
+                            <input type="text" id="new_world_name" autocomplete="off"
+                                   name="name"
+                                   id="new_name"
+                                   ng-required="true"
+                                   class="input-large"
+                                   ng-model="new_world_name"/>
+                            <span class="help-inline " ng-show="new_world_form.name.$error.required">Required</span>
+                            <br />
+                            <span class="help-block">A unique name for your new world.</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="new_radius">World Radius</label>
+
+                        <div class="controls">
+                            <input type="number" id="new_world_radius" autocomplete="off"
+                                   name="radius"
+                                   min="100"
+                                   max="100000"
+                                   id="new_radius"
+                                   ng-required="true"
+                                   class="input-large"
+                                   ng-model="new_world_name"/>
+                            <span class="help-inline " ng-show="new_world_form.radius.$error.required">Required</span>
+                            <br />
+                            <span class="help-block">Your worlds radius.</span>
+
+                            <h3>Basis</h3>
+                            <p>Select an item below to make your planet the same (equatorial) radius as a real
+                                planet</p>
+                            <label class="radio">
+                                <input type="radio" ng-model="radius_basis" name="radius_basis"
+                                       value="manual">
+                                Manual - type in radius yourself
+                            </label>
+                            <label class="radio">
+                                <input type="radio" ng-model="radius_basis" name="radius_basis"
+                                       value="earth">
+                                Earth size - 6,731 km
+                            </label>
+                            <label class="radio">
+                                <input type="radio" ng-model="radius_basis" name="radius_basis"
+                                       value="moon">
+                                Moon size - 1,738 km
+                            </label>
+                            <label class="radio">
+                                <input type="radio" ng-model="radius_basis" name="radius_basis"
+                                       value="mars">
+                                Jupiter size -71,492 km
+                            </label>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button class="btn btn-danger" ng-click="delete()"><i
+                        class="icon-trash"></i> Delete Member
+                </button>
+
+                <button class="btn" ng-click="cancel_edit()">Cancel</button>
+
+                <button class="btn btn-success" ng-click="update_member()"><i
+                        class="icon-pencil "></i>&nbsp;
+                    Update Member
+                </button>
+
+            </div>
+        </div><!-- end new world form -->
+    </div>
+</div>

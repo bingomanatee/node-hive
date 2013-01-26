@@ -1,0 +1,16 @@
+{
+	"name": "string",
+	"map": "objectid",
+	"world": "objectid",
+	"bytes": "number",
+	"signed":    {
+		"type":    "boolean",
+		"default": false
+	},
+	"use_gridfs":    {
+		"type":    "boolean",
+		"default": false
+	},
+	"data":    "buffer",
+	"dat_document": "string"
+}
