@@ -1,0 +1,13 @@
+{
+	"name":         "hive-world",
+	"version":      "0.0.1",
+	"private":      true,
+	"dependencies": {
+		"gate":                "*",
+		"hive-loader":         ">=0.0.1",
+		"underscore":          "*",
+		"marked":              "*",
+		"hive-model-mongoose": ">=0.0.1",
+		"gridfs-stream":       ">=0.3.2"
+	}
+}

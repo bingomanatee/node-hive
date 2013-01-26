@@ -17,6 +17,7 @@
 		"hive-loader":         ">=0.0.1",
 		"hive-menu":           ">=0.0.1",
 		"hive-model-mongoose": ">=0.0.1",
+		"gridfs-stream":       ">=0.3.2",
 		"hive-mvc":            ">=0.0.1a",
 		"less-middleware":     "*",
 		"marked":              "*",
