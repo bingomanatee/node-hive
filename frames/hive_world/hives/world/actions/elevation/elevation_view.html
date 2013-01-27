@@ -1,0 +1,40 @@
+<script language="javascript">
+    world_app.factory('world_id', function () {
+        return {
+            _id: '<%= _id %>'
+        };
+    });
+</script>
+
+<div ng-app="world">
+    <div ng-controller="elevation">
+        <ul class="breadcrumb">
+            <li><a href="/">Home</a> <span class="divider">/</span></li>
+            <li>Worlds<span class="divider">/</span></li>
+            <li>World {{world.name }}<span class="divider">/</span></li>
+            <li>Edit<span class="divider">/</span></li>
+            <li class="active">Elevation</li>
+        </ul>
+        <h1>Edit Elevation of world {{world.name }}</h1>
+
+        <p><b>Circumference</b>: {{circ() | number:2 }} {{world.distance_unit }}</p>
+
+        <div ng-hide="show_canvas">
+            <p>Resolution: <input type="number" ng-model="canvas_width" min="360"/>
+                pixels
+                ({{units_per_pixel() | number:2}}
+                {{world.distance_unit }} / pixel)
+                <button class="btn" ng-click="set_manual_upp()">Set Units Per
+                    Pixel
+                </button>
+            </p>
+            <p>
+                <button ng-click="draw()" class="btn btn-primary btn-large">Draw Elevation</button>
+            </p>
+        </div>
+        <div ng_show="show_canvas">
+            <canvas id="elevation_canvas" width="{{canvas_width}}" height="{{ (canvas_width / 2) | number:0 }}">
+            </canvas>
+        </div>
+    </div>
+</div>

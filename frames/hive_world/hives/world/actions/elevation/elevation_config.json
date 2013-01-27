@@ -1,0 +1,23 @@
+{
+	"routes": {
+		"get": "/world/edit/elevation/:_id"
+	},
+
+	"layout_name": "node_hive",
+
+	"javascript_head": [
+		"/js/world/vendor/underscore-min.js",
+		"/js/world/vendor/angular-1.0.4/angular.min.js",
+		"/js/world/vendor/angular-1.0.4/angular-resource.js",
+		"/js/world/vendor/bootstrap-gh-pages/ui-bootstrap-tpls-0.1.0-SNAPSHOT.js",
+		"/js/world/vendor/EaselJS-0.4.0/easeljs-0.5.0.min.js",
+		"/js/world/model/world.js",
+		"/js/world/elevation/elevation.js",
+		"/js/world/elevation/elevation_canvas.js"
+	],
+
+	"static": {
+		"js":  "/js/world/elevation"
+	}
+
+}

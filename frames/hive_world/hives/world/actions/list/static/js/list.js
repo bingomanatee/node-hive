@@ -64,6 +64,10 @@ function List($scope, $filter, $compile, $dialog, Worlds) {
 		$scope.edit_world = _.clone(world);
 	};
 
+	$scope.edit_elevation = function(world){
+		document.location = '/world/edit/elevation/' + world._id;
+	};
+
 	$scope.delete_edit_world = function () {
 
 		var title = 'Delete planet ' + $scope.edit_world.name + '?';

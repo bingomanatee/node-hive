@@ -27,7 +27,7 @@ module.exports = {
 					context.$out.set('deleted', true);
 					return callback();
 				} else {
-					context.$out.set(world.toJSON());
+					context.$out.setAll(world.toJSON());
 					callback();
 				}
 			});

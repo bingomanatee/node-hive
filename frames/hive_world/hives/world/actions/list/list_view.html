@@ -21,6 +21,7 @@
                 <th>Height<br />Unit</th>
                 <th>Distance<br />Unit</th>
                 <th>&nbsp;</th>
+                <th>&nbsp;</th>
             </tr>
 
             <tr ng-repeat="world in worlds">
@@ -31,6 +32,9 @@
                 <td>{{ world.distance_unit }}</td>
                 <td>
                     <button class="btn" ng-click="edit(world)">Edit</button>
+                </td>
+                <td>
+                    <button class="btn" ng-click="edit_elevation(world)">Elevation</button>
                 </td>
             </tr>
         </table>
