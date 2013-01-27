@@ -8,6 +8,7 @@
 		"underscore":          "*",
 		"marked":              "*",
 		"hive-model-mongoose": ">=0.0.1",
-		"gridfs-stream":       ">=0.3.2"
+		"gridfs-stream":       ">=0.3.2",
+		"atoll":               "0.7.3"
 	}
 }

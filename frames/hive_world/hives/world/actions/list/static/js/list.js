@@ -1,22 +1,5 @@
 function List($scope, $filter, $compile, $dialog, Worlds) {
 
-
-	$scope.units = [
-		{unit: 'km', name: 'Kilometers', in_km: 1},
-		{unit: 'm', name: 'Meters', in_km: 1 / 1000},
-		{unit: 'cm', name: 'Centimeters', in_km: 1 / (1000 * 100)},
-		{unit: 'mi', name: 'Miles', in_km: 1.60934},
-		{unit: 'y', name: 'Yards', in_km: 1.60934 / (5280 / 3)},
-		{unit: 'f', name: 'feet', in_km: 1.60934 / (5280)},
-		{unit: 'in', name: 'Inches', in_km: 1.60934 / (5280 * 12)}
-	];
-
-	function _get_unit(u) {
-		return _.find($scope.units, function (uu) {
-			return uu.unit == u
-		});
-	};
-
 	$scope.world_basis = [
 
 		{
@@ -154,7 +137,7 @@ function List($scope, $filter, $compile, $dialog, Worlds) {
 			return;
 		}
 
-		var rad_unit = _get_unit($scope.new_world.radius_unit);
+		var rad_unit = get_unit($scope.new_world.radius_unit);
 		if (!rad_unit) {
 			return;
 		}

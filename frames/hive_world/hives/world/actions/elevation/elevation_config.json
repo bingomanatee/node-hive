@@ -13,8 +13,14 @@
 		"/js/world/vendor/EaselJS-0.4.0/easeljs-0.5.0.min.js",
 		"/js/world/vendor/EaselJS-0.4.0/BoxBlurFilter.js",
 		"/js/world/vendor/EaselJS-0.4.0/ColorFilter.js",
+		"/js/world/elevation/ColorMapFilter.js",
+		"/js/world/vendor/atoll.js",
+		"/js/world/util/distance.js",
 		"/js/world/model/world.js",
+		"/js/world/elevation/elevation_lat_lon.js",
+		"/js/world/elevation/elevation_utils.js",
 		"/js/world/elevation/elevation.js",
+		"/js/world/elevation/elevation_dist.js",
 		"/js/world/elevation/elevation_canvas.js"
 	],
 

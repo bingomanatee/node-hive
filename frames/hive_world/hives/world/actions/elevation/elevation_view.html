@@ -6,6 +6,13 @@
     });
 </script>
 
+<style>
+    .grey_slider {
+        width: 512px;
+    }
+</style>
+
+
 <div ng-app="world">
     <div ng-controller="elevation">
         <ul class="breadcrumb">
@@ -33,16 +40,140 @@
             </p>
         </div>
         <div ng_show="show_canvas">
-            <canvas id="elevation_canvas" width="{{canvas_width}}" height="{{ half(canvas_width) }}">
-            </canvas><br />
-            <canvas id="elevation_gs_canvas" width="{{canvas_width}}"
+            <canvas id="elevation_canvas" width="{{canvas_width}}"
                     height="{{ half(canvas_width) }}">
-            </canvas><br />
-            <canvas id="elevation_gs_canvas2" width="{{canvas_width}}"
-                    height="{{ half(canvas_width) }}">
+            </canvas>
+            <br/>
+            <canvas id="elevation_gs_canvas" width="{{canvas_width * 2}}"
+                    height="{{ canvas_width }}"
+                    style="width:{{canvas_width}}px; height:{{ half(canvas_width) }}px">
             </canvas>
         </div>
     </div>
-</div>
+    <div ng-controller="elevation_dist" ng-show="show_graph">
+        <h2>Elevation Distribution</h2>
+        <table>
+            <tr>
+                <td>
+                    <canvas width="512" height="200" id="elevation_dist_canvas"></canvas>
+                </td>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <th colspan="2">Grey Value</th>
+                <th>Red</th>
+                <th>Green</th>
+                <th>Blue</th>
+                <th>Height ( {{ world.height_unit }})</th>
+                <th>Height above <br/>sea level ({{ world.height_unit }})</th>
+            </tr>
+            <tr ng_repeat="range_item in range_items">
+                <td>
+                    <input type="range" min="0" max="255" ng-model="range_item.grey" class="grey_slider"/>
+                </td>
+                <td>
+                    {{ range_item.grey }}
+                </td>
+                <td>
+                    <input type="number" class="input-small" min="0" max="255" ng-model="range_item.red"/>
+                </td>
+                <td>
+                    <input type="number" class="input-small" min="0" max="255" ng-model="range_item.green"/>
+                </td>
+                <td>
+                    <input type="number" class="input-small" min="0" max="255" ng-model="range_item.blue"/>
+                </td>
+                <td>
+                    <input type="number" ng-model="range_item.height"/>
+                </td>
+                <td>
+                    {{ range_item.height - sea_level.height }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>(beach color)</b>
+                </td>
+                <td>
+                    {{ beach.grey }}
+                </td>
+                <td>
+                    <input type="number" class="input-small" min="0" max="255" ng-model="beach.red"/>
+                </td>
+                <td>
+                    <input type="number" class="input-small" min="0" max="255" ng-model="beach.green"/>
+                </td>
+                <td>
+                    <input type="number" class="input-small" min="0" max="255" ng-model="beach.blue"/>
+                </td>
+                <td colspan="2">
+                    Earth's oceans are ~ {{8 / height_unit.in_km | number:0 }} {{
+                    height_unit.unit }}
+                    deep.*
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="range" min="0" max="255" ng-model="sea_level.grey" class="grey_slider"/>
+                </td>
+                <td>
+                    {{ sea_level.grey }}
+                </td>
+                <td>
+                    <input type="number" class="input-small" min="0" max="255" ng-model="sea_level.red"/>
+                </td>
+                <td>
+                    <input type="number" class="input-small" min="0" max="255" ng-model="sea_level.green"/>
+                </td>
+                <td>
+                    <input type="number" class="input-small" min="0" max="255" ng-model="sea_level.blue"/>
+                </td>
+                <td>
+                    <input type="number" ng-model="sea_level.height"/>
+                </td>
+                <td>
+                    <b>SEA LEVEL</b>
+                </td>
 
-        <div id="hideme" style="display: none"></div>
+            </tr>
+            <tr>
+                <td>
+                    <input type="range" min="0" max="255" value="0" disabled class="grey_slider"/>
+                </td>
+                <td>
+                    {{ sea_floor.grey }}
+                </td>
+                <td>
+                    <input type="number" class="input-small" min="0" max="255" ng-model="sea_floor.red"/>
+                </td>
+                <td>
+                    <input type="number" class="input-small" min="0" max="255" ng-model="sea_floor.green"/>
+                </td>
+                <td>
+                    <input type="number" class="input-small" min="0" max="255" ng-model="sea_floor.blue"/>
+                </td>
+                <td>
+                    0
+                </td>
+                <td>
+                    {{  sea_floor.height -  sea_level.height }}
+                </td>
+
+            </tr>
+        </table>
+        <hr/>
+        <p>
+            <small>* Technically Earth's oceans go up to 11 km deep; 99% of the oceans go down as far as 8km.</small>
+        </p>
+    </div>
+
+
+</div>
+<h2>Distribution of heights on Earth</h2>
+<p>
+    from Wikipedia's article on <a href="http://en.wikipedia.org/wiki/Elevation">Elevation</a><br/>
+    <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/95/EarthHypso.png/800px-EarthHypso.png"
+         hspace=10 vspace=10/>
+</p>
+
+        <canvas id="colorized_canvas"></canvas>

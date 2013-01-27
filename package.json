@@ -23,6 +23,7 @@
 		"marked":              "*",
 		"mongoose":            "*",
 		"underscore":          "1.4.3",
-		"tap":                 ">=0.3.3"
+		"tap":                 ">=0.3.3",
+		"atoll":               "0.7.3"
 	}
 }
