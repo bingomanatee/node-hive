@@ -34,6 +34,11 @@ module.exports = function (apiary, cb) {
 						title: 'Routes',
 						link: '/in/routes',
 						weight: 0
+					},
+					{
+						title: 'Static Paths',
+						link: '/in/static',
+						weight: 0
 					}
 				]
 			});

@@ -1,0 +1,36 @@
+<h1>Static Paths</h1>
+<p>Static Paths for Apiary <tt><b><%= site_root %></b></tt></p>
+<table class="table table-striped">
+    <tr>
+        <th>Prefix</th>
+        <th>Alias</th>
+        <th>Content</th>
+    </tr>
+    <% _.each(static, function(route, a_index){ %>
+    <tr>
+        <td><%= route.prefix.substring(site_root.length) %></td>
+        <td><%= route.alias %></td>
+        <td>
+            <% if ((route.files && route.files.length) || (route.subfiles && route.subfiles.length) ){ %>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>File</th>
+                    <th>Path</th>
+                    <th>URL</th>
+                </tr>
+                </thead>
+                <% _.each((route.files || []).concat((route.subfiles || [])), function(rc){ %>
+                <tr>
+                    <td><%= rc.file %></td>
+                    <td><%= rc.name %></td>
+                    <td><a href="<%= rc.url %>"><%= rc.url %></a></td>
+                </tr>
+                <% }) // end route foreach %>
+            </table>
+            <% } %>
+        </td>
+
+    </tr>
+    <% }) // routes.forEach %>
+</table>

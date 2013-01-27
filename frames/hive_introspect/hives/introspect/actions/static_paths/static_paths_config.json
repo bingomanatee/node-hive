@@ -1,6 +1,6 @@
 {
 	"routes": {
-			  "get": "/in/routes"
+			  "get": "/in/static"
 	},
 
 	"layout_name": "node_hive"

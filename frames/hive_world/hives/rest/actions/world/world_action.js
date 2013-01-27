@@ -15,7 +15,7 @@ var _DEBUG = false;
 module.exports = {
 
 	on_get_input: function (context, callback) {
-		var model = this.models('hiveworld_world');
+		var model = this.model('hiveworld_world');
 
 		if (context._id) {
 			model.get(context._id, function (err, world) {
@@ -34,9 +34,13 @@ module.exports = {
 		} else {
 
 			model.active(function (err, worlds) {
+				console.log('worlds: %s', util.inspect(worlds));
 				context.$out = _.map(worlds, function (world) {
 					return world.toJSON();
-				})
+				});
+
+				console.log('out: %s', util.inspect(context.$out));
+
 				callback();
 			});
 		}
@@ -53,28 +57,78 @@ module.exports = {
 	},
 
 	on_put_process: function (context, callback){
-		var model = this.models('hiveworld_world');
+		var model = this.model('hiveworld_world');
 
 		var world = {
 			name: context.name,
-			radius: Math.max(100, parseInt(context.radius))
+			radius: Math.max(100, parseInt(context.radius)),
+			height_unit: context.height_unit || 'm',
+			distance_unit: context.distance_unit || 'km',
+			radius_unit: context.radius_unit || 'km'
 		};
 
 		model.put(world, function(err, world_obj){
 			if (err){
 				return callback(err);
 			} else if (world_obj){
-				context.$out.setAll(world.toJSON());
+				context.$out.setAll(world_obj.toJSON());
 				callback();
 			} else {
-				return callback(new Error(util.inspect('cannot create world %s', JSON.stringify(world))));
+				callback(new Error(util.inspect('cannot create world %s', JSON.stringify(world))));
 			}
 		});
 	},
 
+	/* *************** DELETE **************** */
+
+	on_delete_validate: function(context, callback){
+		if (!context._id){
+			return callback(new Error('no ID passed'));
+		} else {
+			callback();
+		}
+	},
+
+	on_delete_input: function(context, callback){
+
+		var model = this.model('hiveworld_world');
+
+		if (context._id) {
+			model.get(context._id, function (err, world_obj) {
+				if (!world_obj) {
+					return callback(new Error('cannot find world ' + context._id));
+				} else if (world_obj.deleted) {
+					var json = world_obj.toJSON();
+					context.$send({
+						_id: json._id,
+						deleted: true
+					});
+					callback('redirect');
+
+				} else {
+					context.world = world_obj;
+					callback();
+				}
+			});
+		}
+	},
+
+	on_delete_process: function(context, callback){
+
+		var model = this.model('hiveworld_world');
+
+		model.delete(context.world, function(){
+
+			var json = context.world.toJSON();
+			context.$out.set('_id', json._id);
+			context.$out.set('deleted', true);
+			callback();
+		}, true);
+	},
+
 	/* *************** POST **************** */
 
-	on_put_validate: function(context, callback){
+	on_post_validate: function(context, callback){
 		if (!context._id){
 			return callback(new Error('no ID passed'));
 		} else {
@@ -84,14 +138,14 @@ module.exports = {
 
 	on_post_input: function(context, callback){
 
-		var model = this.models('hiveworld_world');
+		var model = this.model('hiveworld_world');
 
 		if (context._id) {
-			model.get(context._id, function (err, world) {
-				if (!world) {
+			model.get(context._id, function (err, world_obj) {
+				if (!world_obj) {
 					return callback(new Error('cannot find world ' + context._id));
-				} else if (world.deleted) {
-					var json = world.toJSON();
+				} else if (world_obj.deleted) {
+					var json = world_obj.toJSON();
 					context.$send({
 						_id: json._id,
 						deleted: true
@@ -99,7 +153,7 @@ module.exports = {
 					callback('redirect');
 
 				} else {
-					context.world = world;
+					context.world = world_obj;
 					callback();
 				}
 			});
@@ -113,7 +167,7 @@ module.exports = {
 			return callback(new Error('no world'))
 		}
 
-		_.each(['author', 'radius', 'size_units', 'height_units', 'sea_level'], function(unit){
+		_.each(['author', 'name', 'radius', 'radius_unit', 'distance_unit', 'height_unit', 'sea_level'], function(unit){
 			if (context[unit]){
 				context.world[unit] = context[unit];
 			}
@@ -124,6 +178,7 @@ module.exports = {
 				callback(err);
 			} else {
 				context.$out.setAll(context.world.toJSON());
+				callback();
 			}
 		});
 	}

@@ -2,13 +2,21 @@
 	"name":         "string",
 	"author":       "string",
 	"radius":       "number",
-	"size_units":   {
+	"radius_unit":   {
 		"type":    "string",
 		"default": "km"
 	},
-	"height_units": {
+	"distance_unit":   {
+		"type":    "string",
+		"default": "km"
+	},
+	"height_unit": {
 		"type":    "string",
 		"default": "m"
 	},
-	"sea_level":    "number"
+	"sea_level":    "number",
+	"deleted":      {
+		"type":    "boolean",
+		"default": false
+	}
 }

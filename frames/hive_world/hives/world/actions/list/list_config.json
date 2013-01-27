@@ -7,8 +7,9 @@
 
 	"javascript_head": [
 		"/js/world/vendor/underscore-min.js",
-		"/js/world/vendor/angular.min.js",
-		"/js/world/vendor/angular-resource.js",
+		"/js/world/vendor/angular-1.0.4/angular.min.js",
+		"/js/world/vendor/angular-1.0.4/angular-resource.js",
+		"/js/world/vendor/bootstrap-gh-pages/ui-bootstrap-tpls-0.1.0-SNAPSHOT.js",
 		"/js/world/model/world.js",
 		"/js/world/list/list.js"
 	],

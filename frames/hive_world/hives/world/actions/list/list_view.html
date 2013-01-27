@@ -7,31 +7,40 @@
 <div ng-app="world">
     <div ng-controller="list">
         <h1>Worlds</h1>
-        <p>Add A World: <button class="btn btn-success" ng-click="create()"><i class="icon-pencil"></i> Create</button>
+
+        <p>Add A World:
+            <button class="btn btn-primary btn-large" ng-click="create_world()"><i class="icon-plus icon-white"></i>
+                Create a planet
+            </button>
         </p>
         <table class="table">
             <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Radius</th>
+                <th>Height<br />Unit</th>
+                <th>Distance<br />Unit</th>
                 <th>&nbsp;</th>
             </tr>
 
             <tr ng-repeat="world in worlds">
                 <td>{{world._id }}</td>
                 <td>{{world.name}}</td>
-                <td>{{world.radius }}</td>
+                <td>{{world.radius }} {{ world.radius_unit }}</td>
+                <td>{{ world.height_unit }}</td>
+                <td>{{ world.distance_unit }}</td>
                 <td>
                     <button class="btn" ng-click="edit(world)">Edit</button>
                 </td>
             </tr>
-        </table><!-- end world list -->
+        </table>
+        <!-- end world list -->
 
-        <div modal="open_world_new" close="close_world_new()">
+        <div modal="open_world_new" close="close_world_new()" style="width: 60%">
             <div class="modal-header">
                 <h4>Create World</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="max-height: 30em">
 
                 <form name="new_world_form" class="form-horizontal" ng-submit="update_member()">
 
@@ -43,71 +52,190 @@
                                    name="name"
                                    id="new_name"
                                    ng-required="true"
-                                   class="input-large"
-                                   ng-model="new_world_name"/>
+                                   class="input-xlarge"
+                                   ng-model="new_world.name"/>
                             <span class="help-inline " ng-show="new_world_form.name.$error.required">Required</span>
-                            <br />
+                            <br/>
                             <span class="help-block">A unique name for your new world.</span>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="new_radius">World Radius</label>
+                        <label class="control-label" for="new_world_radius">World Radius</label>
 
                         <div class="controls">
                             <input type="number" id="new_world_radius" autocomplete="off"
                                    name="radius"
-                                   min="100"
-                                   max="100000"
-                                   id="new_radius"
                                    ng-required="true"
                                    class="input-large"
-                                   ng-model="new_world_name"/>
+                                   ng-disabled="new_world_radius_basis_locked()"
+                                   ng-model="new_world.radius"/>
+
+                            <select ng-model="new_world.radius_unit"
+                                    class="input-small" ng-options="u.unit as u.name for u in units">
+                                <option></option>
+                            </select>
+
                             <span class="help-inline " ng-show="new_world_form.radius.$error.required">Required</span>
-                            <br />
+                            <br/>
                             <span class="help-block">Your worlds radius.</span>
 
-                            <h3>Basis</h3>
-                            <p>Select an item below to make your planet the same (equatorial) radius as a real
-                                planet</p>
-                            <label class="radio">
-                                <input type="radio" ng-model="radius_basis" name="radius_basis"
-                                       value="manual">
-                                Manual - type in radius yourself
-                            </label>
-                            <label class="radio">
-                                <input type="radio" ng-model="radius_basis" name="radius_basis"
-                                       value="earth">
-                                Earth size - 6,731 km
-                            </label>
-                            <label class="radio">
-                                <input type="radio" ng-model="radius_basis" name="radius_basis"
-                                       value="moon">
-                                Moon size - 1,738 km
-                            </label>
-                            <label class="radio">
-                                <input type="radio" ng-model="radius_basis" name="radius_basis"
-                                       value="mars">
-                                Jupiter size -71,492 km
-                            </label>
+                            <accordion close-others="false">
+                                <accordion-group
+                                        heading="Basis for Radius ({{get_basis(new_world.radius_basis).label}})">
+
+                                    <p>Make your planet's radius equal to:</p>
+
+                                    <label ng-repeat="basis in world_basis" class="radio">
+                                        <input type="radio" ng-model="new_world.radius_basis" name="radius_basis"
+                                               ng-value="basis.name">
+                                        {{basis.label }}
+                                    </label>
+                                </accordion-group>
+                            </accordion>
                         </div>
                     </div>
 
+                    <div class="control-group">
+                        <label class="control-label" for="new_world_radius">Distance Units</label>
+
+                        <div class="controls">
+                            <select ng-model="new_world.distance_unit" ng-required="true"
+                                    class="input-medium" ng-options="u.unit as u.name for u in units">
+                                <option></option>
+                            </select>
+                        <span class="help-inline "
+                              ng-show="new_world_form.distance_unit.$error.required">Required</span><br/>
+                            <span class="help-block">The unit of measurement for distance accross the surface</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="new_world_radius">Height Units</label>
+
+                        <div class="controls">
+                            <select ng-model="new_world.height_unit" ng-required="true"
+                                    class="input-medium" ng-options="u.unit as u.name for u in units">
+                                <option></option>
+                            </select>
+                        <span class="help-inline "
+                              ng-show="new_world_form.height_unit.$error.required">Required</span><br/>
+                            <span class="help-block">The unit of measurement for elevation/altitude</span>
+                        </div></div>
                 </form>
             </div>
             <div class="modal-footer">
+                <button class="btn btn-cancel" ng-click="cancel_new_world()">Cancel</button>
 
-                <button class="btn btn-danger" ng-click="delete()"><i
-                        class="icon-trash"></i> Delete Member
-                </button>
-
-                <button class="btn" ng-click="cancel_edit()">Cancel</button>
-
-                <button class="btn btn-success" ng-click="update_member()"><i
+                <button class="btn btn-success" ng-click="create_new_world()"><i
                         class="icon-pencil "></i>&nbsp;
-                    Update Member
+                    Create Planet
                 </button>
 
             </div>
-        </div><!-- end new world form -->
+        </div>
+        <!-- end new world form -->
+
+        <!-- start edit world form -->
+        <div modal="edit_world" close="close_world_edit()" style="width: 60%">
+            <div class="modal-header">
+                <h4>Create World</h4>
+            </div>
+            <div class="modal-body" style="max-height: 30em">
+
+                <form name="edit_world_form" class="form-horizontal" ng-submit="update_member()">
+
+                    <div class="control-group">
+                        <label class="control-label" for="edit_name">World Name</label>
+
+                        <div class="controls">
+                            <input type="text" id="edit_world_name" autocomplete="off"
+                                   name="name"
+                                   id="edit_name"
+                                   ng-required="true"
+                                   class="input-xlarge"
+                                   ng-model="edit_world.name"/>
+                            <span class="help-inline " ng-show="edit_world_form.name.$error.required">Required</span>
+                            <br/>
+                            <span class="help-block">A unique name for your edit world.</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="edit_world_radius">World Radius</label>
+
+                        <div class="controls">
+                            <input type="number" id="edit_world_radius" autocomplete="off"
+                                   name="radius"
+                                   ng-required="true"
+                                   class="input-large"
+                                   ng-disabled="edit_world_radius_basis_locked()"
+                                   ng-model="edit_world.radius"/>
+
+                            <select ng-model="edit_world.radius_unit"
+                                    class="input-small" ng-options="u.unit as u.name for u in units">
+                                <option></option>
+                            </select>
+
+                            <span class="help-inline " ng-show="edit_world_form.radius.$error.required">Required</span>
+                            <br/>
+                            <span class="help-block">Your worlds radius.</span>
+
+                            <accordion close-others="false">
+                                <accordion-group
+                                        heading="Basis for Radius ({{get_basis(edit_world.radius_basis).label}})">
+
+                                    <p>Make your planet's radius equal to:</p>
+
+                                    <label ng-repeat="basis in world_basis" class="radio">
+                                        <input type="radio" ng-model="edit_world.radius_basis" name="radius_basis"
+                                               ng-value="basis.name">
+                                        {{basis.label }}
+                                    </label>
+                                </accordion-group>
+                            </accordion>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="edit_world_radius">Distance Units</label>
+
+                        <div class="controls">
+                            <select ng-model="edit_world.distance_unit" ng-required="true"
+                                    class="input-medium" ng-options="u.unit as u.name for u in units">
+                                <option></option>
+                            </select>
+                        <span class="help-inline "
+                              ng-show="edit_world_form.distance_unit.$error.required">Required</span><br/>
+                            <span class="help-block">The unit of measurement for distance accross the surface</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="edit_world_radius">Height Units</label>
+
+                        <div class="controls">
+                            <select ng-model="edit_world.height_unit" ng-required="true"
+                                    class="input-medium" ng-options="u.unit as u.name for u in units">
+                                <option></option>
+                            </select>
+                        <span class="help-inline "
+                              ng-show="edit_world_form.height_unit.$error.required">Required</span><br/>
+                            <span class="help-block">The unit of measurement for elevation/altitude</span>
+                        </div></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" ng-click="delete_edit_world()"><i
+                        class="icon-trash icon-white"></i>Delete Planet</button>
+
+                <button class="btn btn-cancel" ng-click="cancel_edit_world()">Cancel</button>
+
+                <button class="btn btn-success" ng-click="update_edit_world()"><i
+                        class="icon-pencil "></i>&nbsp;
+                    Update Planet
+                </button>
+
+            </div>
+        </div>
+        <!-- end edit world form -->
     </div>
 </div>
