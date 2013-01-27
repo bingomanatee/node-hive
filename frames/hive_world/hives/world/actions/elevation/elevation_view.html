@@ -33,8 +33,16 @@
             </p>
         </div>
         <div ng_show="show_canvas">
-            <canvas id="elevation_canvas" width="{{canvas_width}}" height="{{ (canvas_width / 2) | number:0 }}">
+            <canvas id="elevation_canvas" width="{{canvas_width}}" height="{{ half(canvas_width) }}">
+            </canvas><br />
+            <canvas id="elevation_gs_canvas" width="{{canvas_width}}"
+                    height="{{ half(canvas_width) }}">
+            </canvas><br />
+            <canvas id="elevation_gs_canvas2" width="{{canvas_width}}"
+                    height="{{ half(canvas_width) }}">
             </canvas>
         </div>
     </div>
 </div>
+
+        <div id="hideme" style="display: none"></div>

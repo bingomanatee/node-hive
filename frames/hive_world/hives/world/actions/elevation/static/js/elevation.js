@@ -30,6 +30,10 @@ function Elevation($scope, $filter, $compile, $dialog, Worlds, world_id) {
 		return units_per_pixel;
 	}
 
+	$scope.half = function(v){
+		return Math.floor(v / 2)
+	}
+
 	$scope.show_canvas = false;
 
 	$scope.draw = function(){
