@@ -94,12 +94,12 @@ var init_elevation_dist_canvas = (function (window) {
 		var blue = c1.blue * d1 + c2.blue * d2;
 
 		var out = {red: parseInt(red/d), green: parseInt(green/d), blue: parseInt(blue/d)};
-		console.log('interp ', c1, c2, 'for ', g, ': ', out);
+		// 
 		return out;
 	}
 
 	function update_elevation_colors(data) {
-		if (!stage) return console.log('skipping update elevation colors');
+		if (!stage) return 
 		var new_color;
 		_.each(data, function (data_item, i) {
 			data_item.grey = parseInt(data_item.grey);
@@ -114,7 +114,7 @@ var init_elevation_dist_canvas = (function (window) {
 			} else {
 				 new_color = interpolate_color(bar.grey, colors[0], colors[1]);
 			}
-			console.log('color for bar ', bar.grey, ': ', new_color);
+			
 			bar.color(new_color.red, new_color.green, new_color.blue);
 		});
 		stage.update();
@@ -140,7 +140,7 @@ var init_elevation_dist_canvas = (function (window) {
 		stage.tickOnUpdate = true;
 
 		window.update_dist_data = update_dist_data;
-		console.log('set UDD');
+		
 	};
 
 })(window);

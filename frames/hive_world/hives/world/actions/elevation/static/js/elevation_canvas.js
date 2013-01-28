@@ -52,7 +52,13 @@ var init_elevation_canvas = function () {
 			return;
 		}
 		var cm_filter = new createjs.ColorMapFilter(bars);
-		cm_filter.applyFilter(elevation_gs_context, 0, 0, gs_width, gs_height, colorized_canvas.getContext('2d'));
+		var color_context = colorized_canvas.getContext('2d');
+		cm_filter.applyFilter(elevation_gs_context, 0, 0, gs_width, gs_height, color_context);
+		var heights = _.pluck(bars, 'height');
+
+		//var s_filter = new createjs.ShadowFilter(heights, 1);
+	//	s_filter.applyFilter(color_context, 0, 0, gs_width, gs_height);
+		stage.update();
 	};
 
 	function init_color_canvas() {

@@ -1,6 +1,6 @@
 function Elevation($scope, $filter, $compile, $dialog, Worlds, world_id) {
 
-	console.log('Elevation parent: ', $scope.$parent);
+	
 
 	$scope.canvas_width = 720;
 
@@ -11,7 +11,7 @@ function Elevation($scope, $filter, $compile, $dialog, Worlds, world_id) {
 	$scope.$watch('world_id()', function (id) {
 		if (id) {
 			$scope.world = Worlds.get(id, function (world) {
-				console.log('world: ', world);
+				
 				$scope.$parent.$emit('world', world)
 			});
 		}
@@ -42,7 +42,7 @@ function Elevation($scope, $filter, $compile, $dialog, Worlds, world_id) {
 	$scope.draw = function () {
 		$scope.show_canvas = true;
 		init_elevation_dist_canvas();
-		console.log('... sg ');
+		
 		$scope.$parent.$emit('graph_ele', true);
 	};
 
@@ -114,13 +114,13 @@ var world_app = angular.module('world', ['worldServices', 'ui.bootstrap']);
 
 function Ele_Dist($scope, $filter, $compile, $dialog, Worlds) {
 
-	console.log('Ele_Dist parent: ', $scope.$parent);
+	
 
 	$scope.show_graph = false;
 	$scope.range_items = [
 		{grey: 255, red: 204, green: 245, blue: 255, height: 5000},
 		{grey: 204, red: 102, green: 85, blue: 75, height: 3000},
-		{grey: 175, red: 175, green: 153, blue: 0, height: 2200},
+		{grey: 175, red: 127, green: 115, blue: 0, height: 2200},
 		{grey: 153, red: 51, green: 125, blue: 25, height: 1800},
 		{grey: 128, red: 0, green: 204, blue: 51, height: 1200}
 	];
@@ -155,7 +155,6 @@ function Ele_Dist($scope, $filter, $compile, $dialog, Worlds) {
 		out.push($scope.sea_floor);
 		out.push($scope.beach);
 		out = _.sortBy(out, 'grey');
-		console.log('elevations: ', out);
 		return out;
 	};
 	var li;
@@ -175,7 +174,7 @@ function Ele_Dist($scope, $filter, $compile, $dialog, Worlds) {
 
 	function _send_elevations() {
 		var elevations = $scope.elevations();
-		console.log('updating elevation with ', elevations);
+		
 		update_elevation_colors(elevations);
 	}
 }
