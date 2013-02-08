@@ -121,11 +121,11 @@ function Ele_Dist($scope, $filter, $compile, $dialog, Worlds) {
 		{grey: 255, red: 204, green: 245, blue: 255, height: 5000},
 		{grey: 204, red: 102, green: 85, blue: 75, height: 3000},
 		{grey: 175, red: 127, green: 115, blue: 0, height: 2200},
-		{grey: 153, red: 51, green: 125, blue: 25, height: 1800},
-		{grey: 128, red: 0, green: 204, blue: 51, height: 1200}
+		{grey: 150, red: 51, green: 125, blue: 25, height: 1800},
+		{grey: 135, red: 0, green: 204, blue: 51, height: 1200}
 	];
 
-	$scope.sea_level = { grey: 51, red: 0, green: 128, blue: 255, height: 800};
+	$scope.sea_level = { grey: 128, red: 0, green: 128, blue: 255, height: 800};
 	$scope.sea_floor = { grey: 0, red: 0, green: 0, blue: 0, height: 0};
 	$scope.beach = { grey: 51, red: 255, green: 204, blue: 128, height: 800};
 

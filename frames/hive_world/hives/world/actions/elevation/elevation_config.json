@@ -17,6 +17,7 @@
 		"/js/world/elevation/ColorMapFilter.js",
 		"/js/world/vendor/atoll.js",
 		"/js/world/util/distance.js",
+		"/js/world/util/topo.js",
 		"/js/world/model/world.js",
 		"/js/world/elevation/elevation_lat_lon.js",
 		"/js/world/elevation/elevation_utils.js",

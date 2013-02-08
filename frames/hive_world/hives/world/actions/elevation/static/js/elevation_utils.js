@@ -34,7 +34,7 @@ var elevation_utils = function () {
 			if (grey < range_min) return 0;
 			if (grey > range_max) return 255;
 			return 255 * (grey - range_min) / range;
-		})
+		});
 		//
 
 		var ctx = elevation_gs_stage.canvas.getContext('2d');
@@ -112,7 +112,7 @@ var elevation_utils = function () {
 		elevation_gs_stage.addChild(new createjs.Shape(g));
 
 		var alpha = 1;
-		var data = _.map(_.range(21, 1, -2), function (n) {
+		var data = _.map(_.range(31, 1, -1.25), function (n) {
 			return n * n
 		});
 		var dl = data.length;
@@ -120,7 +120,7 @@ var elevation_utils = function () {
 		var b = 0.1;
 
 		var alphas = _.map(_.range(a, b, ( b - a) / dl), function (v) {
-			return v * v;
+			return v * v * 2
 		})
 
 		alphas[0] = 1;

@@ -4,6 +4,7 @@ var init_elevation_canvas = function () {
 	var elevation_context;
 	var elevation_gs_context;
 	var colorized_canvas;
+	var relief_canvas;
 
 	var stage;
 	var bg_con;
@@ -48,17 +49,13 @@ var init_elevation_canvas = function () {
 	}
 
 	window.colorize_elevation = function (bars) {
-		if (!bars){
+		if (!bars) {
 			return;
 		}
 		var cm_filter = new createjs.ColorMapFilter(bars);
 		var color_context = colorized_canvas.getContext('2d');
 		cm_filter.applyFilter(elevation_gs_context, 0, 0, gs_width, gs_height, color_context);
 		var heights = _.pluck(bars, 'height');
-
-		//var s_filter = new createjs.ShadowFilter(heights, 1);
-	//	s_filter.applyFilter(color_context, 0, 0, gs_width, gs_height);
-		stage.update();
 	};
 
 	function init_color_canvas() {
@@ -66,11 +63,53 @@ var init_elevation_canvas = function () {
 		colorized_canvas = document.getElementById('colorized_canvas');
 		colorized_canvas.width = gs_width = elevation_gs_canvas.width;
 		colorized_canvas.height = gs_height = elevation_gs_canvas.height;
+
+
+		relief_canvas = document.createElement('canvas');
+		relief_canvas.width = gs_width;
+		relief_canvas.height = gs_height;
+		relief_canvas.compositeOperation = 'darker';
+
+		var node_topo = require('node-topography');
+
+		var aoi_filter = node_topo.filters.aoi({light_x: 0, light_y: -0.5});
+
+		node_topo.TopoGrid({},
+			{
+				width: gs_width, height: gs_height,
+				source: elevation_gs_canvas,
+				'source_type': 'canvas'
+			},
+
+			function (err, elevation_topo) {
+				elevation_topo.compress_to_greyscale();
+				elevation_topo.filter(
+					function (err, aoi_topo) {
+						_.each(aoi_topo.data, function(colors){
+							var r = colors[0];
+							colors[3] =  2 * Math.abs(r - 128);
+						});
+
+						aoi_topo.data_to_canvas(relief_canvas);
+						stage.update();
+					},
+					aoi_filter,
+					true
+				);
+
+			});
+
+		var rshape = new createjs.Shape(new createjs.Bitmap(relief_canvas))
+		rshape.scaleX = rshape.scaleY = 1;
+		rshape.compositeOperation = 'darker';
+		rshape.alpha = 0.5;
+
 		elevation_gs_context = elevation_gs_canvas.getContext('2d');
 		var shape = new createjs.Shape(new createjs.Bitmap(colorized_canvas))
-		shape.scaleX = shape.scaleY = 0.5;
+		shape.scaleX = shape.scaleY = 1;
 
 		ele_con.addChild(shape);
+		ele_con.addChild(rshape);
 
 		stage.addChild(ele_con);
 	};

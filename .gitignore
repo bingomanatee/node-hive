@@ -2,3 +2,4 @@
 /.idea/
 .DS_Store
 /frames/hive_introspect/node_modules/
+/frames/hive_world/npm-debug.log
